@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## Features
+
+* User Authentication with JWT token.
+* Add Hot toaster.
+* Add Gaurd.
+* Add interceptors.
+
 ## Available Scripts
 
 In the project directory, you can run:
