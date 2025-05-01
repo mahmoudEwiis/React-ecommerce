@@ -4,7 +4,7 @@ import { Form, Button, FloatingLabel, Container, Row, Col } from 'react-bootstra
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './auth.css';
 import { Link } from 'react-router-dom';
-import { login } from './authAPI';
+import { getProfile, login } from './authAPI';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,12 @@ export default function Login() {
         if (emailValid && passwordValid) {
             try {
                 const { access_token } = await login({ email , password });
-                localStorage.setItem('token', access_token)
+                localStorage.setItem('token', access_token);
+
+                const profile =  await getProfile()
+                console.log(profile)
+
+
                 toast.success('Logged in!');
                 navigate('/'); 
             } catch (err) {
