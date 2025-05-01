@@ -1,7 +1,122 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Form, Button, FloatingLabel, Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './auth.module.css';
 
 export default function Register() {
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
+  const [touched, setTouched] = useState({ name: false, email: false, password: false, confirm: false });
+
+  const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(form.email);
+  const nameValid = form.name.trim().length > 0;
+  const passwordValid = form.password.length >= 6;
+  const confirmValid = form.confirm.length && form.confirm === form.password ;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleBlur = (field) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTouched({ name: true, email: true, password: true, confirm: true });
+    if (nameValid && emailValid && passwordValid && confirmValid) {
+      console.log('Register data:', form);
+    }
+  };
+
   return (
-    <div>Register</div>
-  )
+    <Container fluid className="vh-100 d-flex justify-content-center align-items-center">
+      <Row className="w-100 justify-content-center">
+        <Col xs={12} sm={8} md={6} lg={4}>
+          <h2 className="mb-4 text-center">Create a New Account</h2>
+          <Form noValidate onSubmit={handleSubmit} className="w-100">
+            <FloatingLabel controlId="floatingName" label="Full Name" className="mb-3 form-floating-custom">
+              <Form.Control
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={form.name}
+                onChange={handleChange}
+                onBlur={() => handleBlur('name')}
+                isInvalid={touched.name && !nameValid}
+                isValid={touched.name && nameValid}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter your name.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+
+            <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 form-floating-custom">
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Email address"
+                value={form.email}
+                onChange={handleChange}
+                onBlur={() => handleBlur('email')}
+                isInvalid={touched.email && !emailValid}
+                isValid={touched.email && emailValid}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid email address.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+
+            <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3 form-floating-custom">
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                onBlur={() => handleBlur('password')}
+                isInvalid={touched.password && !passwordValid}
+                isValid={touched.password && passwordValid}
+                required
+                minLength={6}
+              />
+              <Form.Control.Feedback type="invalid">
+                Password must be at least 6 characters.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+
+            <FloatingLabel controlId="floatingConfirm" label="Confirm Password" className="mb-4 form-floating-custom">
+              <Form.Control
+                type="password"
+                name="confirm"
+                placeholder="Confirm Password"
+                value={form.confirm}
+                onChange={handleChange}
+                onBlur={() => handleBlur('confirm')}
+                isInvalid={touched.confirm && !confirmValid}
+                isValid={touched.confirm && confirmValid}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Passwords do not match.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+
+            <Button variant="success" type="submit" className="w-100 mb-3">
+              Register
+            </Button>
+
+            <div className="text-center d-flex justify-content-center align-items-center gap-2">
+              Already have an account?{' '}
+              <Link to="/login" className="btn btn-link p-0">
+                Login
+              </Link>
+            </div>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
