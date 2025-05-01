@@ -1,8 +1,8 @@
 import axiosInstance from '../../services/axiosInstance';
 
-export const login = async (credentials) => {
+export const login = async ({ email, password }) => {
   try {
-    const response = await axiosInstance.post('/auth/login', credentials);
+    const response = await axiosInstance.post('/auth/login', { email , password});
     return response.data;
   } catch (error) {
     const message = error.response?.data || 'Something went wrong while logging in.';

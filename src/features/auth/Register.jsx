@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, FloatingLabel, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './auth.module.css';
+import './auth.css';
 
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
