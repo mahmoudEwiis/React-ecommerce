@@ -12,17 +12,19 @@
 import React, { useState } from 'react';
 import { Form, Button, FloatingLabel, Container, Row, Col } from 'react-bootstrap';
 import './auth.module.css'; 
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { login } from './authAPI';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [touched, setTouched] = useState({ email: false, password: false });
+  const [touched, setTouched] = useState({ userName: false, password: false });
+  const navigate = useNavigate();
 
-  const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
   const passwordValid = password.length >= 6;
+  const userNameValid = userName.length > 0; 
 
   const handleBlur = (field) => {
     setTouched(prev => ({ ...prev, [field]: true }));
@@ -30,16 +32,17 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setTouched({ email: true, password: true });
-    if (emailValid && passwordValid) {
+    setTouched({ userName: true, password: true });
+    if (userNameValid && passwordValid) {
       try {
         const credentials = {
-          username: email,
+          username: userName,
           password: password,
         };
         const data = await login(credentials);
         localStorage.setItem('token', data.token);
-        toast.success('Logged in!');
+        toast.success('Logged in successfully!');
+        navigate('/');
       } catch (err) {
         toast.error(err.message);
       }
@@ -54,7 +57,7 @@ export default function Login() {
         <Col xs={12} sm={8} md={6} lg={4}>
           <h2 className="mb-4 text-center">Login to Your Account</h2>
           <Form noValidate onSubmit={handleSubmit} className="w-100">
-            <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 form-floating-custom">
+            {/* <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 form-floating-custom">
               <Form.Control
                 type="email"
                 placeholder="Email address"
@@ -68,7 +71,26 @@ export default function Login() {
               <Form.Control.Feedback type="invalid">
                 Please enter a valid email address.
               </Form.Control.Feedback>
+            </FloatingLabel> */}
+
+            <FloatingLabel controlId="floatingUserName" label="User Name" className="mb-3 form-floating-custom">
+              <Form.Control
+                type="text"
+                placeholder="User Name"
+                value={userName}
+                onBlur={() => handleBlur('userName')}
+                onChange={e => setUserName(e.target.value)}
+                isInvalid={touched.userName && !userNameValid}
+                isValid={touched.userName && userNameValid}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid User Name.
+              </Form.Control.Feedback>
             </FloatingLabel>
+
+
+            
 
             <FloatingLabel controlId="floatingPassword" label="Password" className="mb-4 form-floating-custom">
               <Form.Control
@@ -79,7 +101,7 @@ export default function Login() {
                 onBlur={() => handleBlur('password')}
                 isInvalid={touched.password && !passwordValid}
                 isValid={touched.password && passwordValid}
-
+                required
               />
               <Form.Control.Feedback type="invalid">
                 Password must be at least 6 characters.
