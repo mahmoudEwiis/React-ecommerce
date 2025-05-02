@@ -1,11 +1,10 @@
-/* src/features/auth/Login.css */
 
 .form-floating-custom {
     position: relative;
   }
   
   .form-floating-custom .form-control {
-    padding-right: 3rem; /* make room for toggle icon and validation icon */
+    padding-right: 3rem; 
   }
   
   .form-floating-custom .form-control:focus ~ label,
@@ -20,25 +19,37 @@
   }
   
   
-  /* Toggle eye icon */
-  .password-toggle-icon {
-    position: absolute;
-    top: 50%;
-    right: 1.8rem;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #6c757d;
-    z-index: 2;
-  }
   
-  /* Ensure validation icons don't overlap with toggle icon */
   .form-control.is-invalid,
   .form-control.is-valid {
     background-position: right 1.75rem center;
   }
   
-  /* Adjust feedback tooltips position if needed */
   .was-validated .form-control:invalid ~ .invalid-feedback {
     display: block;
   }
   
+
+
+  .form-floating-custom {
+    position: relative;
+  }
+  
+  .password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+    color: #6c757d;
+  }
+  
+  input.is-invalid + .password-toggle-icon {
+    right: 2.5rem !important; 
+    top: 32%;
+  }
+
+  input.is-valid + .password-toggle-icon {
+    right: 2.5rem !important; 
+  }
