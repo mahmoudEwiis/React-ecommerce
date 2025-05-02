@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from './productsAPI';
 import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap';
-import './ProductList.css';
 import ProductCard from '../../components/ProductCard';
+import useCart from '../../hooks/useCart';
+import useFavorites from '../../hooks/useFavorites';
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [favorites, setFavorites] = useState(() => {
-        const fav = localStorage.getItem('favorites');
-        return fav ? JSON.parse(fav) : [];
-    });
 
-    const [cart, setCart] = useState(() => {
-        const c = localStorage.getItem('cart');
-        return c ? JSON.parse(c) : [];
-    });
+    const { addToCart } = useCart();
+    const { favorites, toggleFavorite } = useFavorites();
 
 
 
@@ -43,27 +38,6 @@ export default function ProductList() {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
 
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
-
-    const toggleFavorite = (id) => {
-        setFavorites((prev) =>
-            prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
-        );
-    };
-
-    const handleAddToCart = (product) => {
-        setCart((prev) => {
-            const item = prev.find((i) => i.product.id === product.id);
-            if (item) {
-                return prev.map((i) =>
-                    i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
-                );
-            }
-            return [...prev, { product, quantity: 1 }];
-        });
-    };
 
     if (loading) {
         return (
@@ -102,8 +76,8 @@ export default function ProductList() {
                     <Col key={product.id} className="position-relative">
                         <ProductCard
                             product={product}
-                            onAddToCart={handleAddToCart}
-                            isFavorite={favorites.includes(product.id)}
+                            onAddToCart={addToCart}
+                            isFavorite={favorites.find((p)=> p.id == product.id)}
                             toggleFavorite={toggleFavorite}
                         />
                     </Col>

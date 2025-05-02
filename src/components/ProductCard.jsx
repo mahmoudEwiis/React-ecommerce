@@ -13,7 +13,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
         />
         <div
           className="position-absolute top-0 end-0 p-2"
-          onClick={() => toggleFavorite(product.id)}
+          onClick={() => toggleFavorite(product)}
           style={{ cursor: 'pointer', fontSize: '1.2rem', color: '#dc3545' }}
         >
           {isFavorite ? <FaHeart /> : <FaRegHeart />}

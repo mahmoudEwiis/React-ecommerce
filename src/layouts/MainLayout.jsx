@@ -1,41 +1,62 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import Navbar from './Navbar';
+import useCart from '../hooks/useCart';
+import useFavorites from '../hooks/useFavorites';
+import CartSidebar from './CartSidebar';
+import FavoritesSidebar from './FavoritesSidebar';
 
 export default function MainLayout({ children }) {
     const location = useLocation();
     const minimalRoutes = ['/login', '/register'];
     const isMinimal = minimalRoutes.includes(location.pathname);
+    const { cartItems , setCartItems, removeFromCart , useCartListener } = useCart();
+    const { favorites, removeFromFavorites } = useFavorites();
+
+    const [showCart, setShowCart] = useState(false);
+    const [showFavorites, setShowFavorites] = useState(false);
+
+    const handleToggleCart = () => setShowCart(prev => !prev);
+    const handleToggleFavorites = () => setShowFavorites(prev => !prev);
+    
+    useCartListener(setCartItems)
 
     if (isMinimal) {
         return <>{children}</>;
     }
 
     return (
-        <div className="min-h-screen flex flex-col">
-            {/* Header */}
-            <header className="bg-white shadow-md">
-                <nav className="container mx-auto px-4 py-3 flex justify-between items-center">
-                    <Link to="/" className="text-xl font-bold text-blue-600">MyShop</Link>
-                    <ul className="flex space-x-4">
-                        <li><Link to="/" className="hover:text-blue-500">Home</Link></li>
-                        <li><Link to="/cart" className="hover:text-blue-500">Cart</Link></li>
-                        <li><Link to="/login" className="hover:text-blue-500">Login</Link></li>
-                        <li><Link to="/register" className="hover:text-blue-500">Register</Link></li>
-                    </ul>
-                </nav>
+        <div className="min-h-screen d-flex flex-column">
+            
+            <header className="bg-white shadow-sm ">
+                <Navbar onToggleCart={handleToggleCart} onToggleFavorites={handleToggleFavorites} />
             </header>
 
-            {/* Main Content */}
-            <main className="flex-grow container mx-auto px-4 py-6">
+            
+            <main className="flex-grow container mt-5 py-4">
                 {children}
             </main>
 
-            {/* Footer */}
-            <footer className="bg-gray-100">
-                <div className="container mx-auto px-4 py-4 text-center text-sm text-gray-600">
-                    © {new Date().getFullYear()} MyShop. All rights reserved.
-                </div>
+            
+            <footer className="bg-light text-center text-muted py-3">
+                © {new Date().getFullYear()} MyShop. All rights reserved.
             </footer>
+
+            <CartSidebar
+                show={showCart}
+                onClose={() => setShowCart(false)}
+                cartItems={cartItems}
+                onRemove={removeFromCart}
+            />
+
+            <FavoritesSidebar
+                show={showFavorites}
+                onClose={() => setShowFavorites(false)}
+                favorites={favorites}
+                onRemove={removeFromFavorites}
+            />
         </div>
     );
 }
+
