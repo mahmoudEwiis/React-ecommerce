@@ -1,0 +1,23 @@
+.product-card .icon-actions {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.4s ease;
+}
+
+.product-card:hover .icon-actions {
+    opacity: 1 !important;
+    /* transform: translateX(0px)  !important; */
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+}
