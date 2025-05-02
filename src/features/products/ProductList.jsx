@@ -16,14 +16,14 @@ export default function ProductList() {
 
 
 
-    const itemsPerPage =20;
+    const itemsPerPage =8;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const offset = (currentPage - 1) * itemsPerPage;
-                const data = await getProducts({ limit: offset, offset : 0 });
+                const data = await getProducts({ limit: itemsPerPage, offset : offset });
                 setProducts(data);
             } catch (err) {
                 setError(err.message || "Something went wrong");
