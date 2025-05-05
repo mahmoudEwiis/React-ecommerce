@@ -11,6 +11,8 @@
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.5",
+    "lodash": "^4.17.21",
+    "rc-slider": "^11.1.8",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
