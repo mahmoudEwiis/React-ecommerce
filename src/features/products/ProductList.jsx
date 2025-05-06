@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from './productsAPI';
+import { getProductCategories, getProducts } from './productsAPI';
 import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import useCart from '../../hooks/useCart';
@@ -17,6 +17,7 @@ export default function ProductList() {
     const debouncedFilters = useDebounce(filters, 500);
 
     const [products, setProducts] = useState([]);
+    const [categories, setcategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -29,6 +30,23 @@ export default function ProductList() {
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
+
+    useEffect(() => {
+        const getcategories = async () => {
+            try {
+                const data = await getProductCategories();
+                setcategories(
+                    data.map(item => ({
+                        id: item.id,
+                        name: item.name
+                    }))
+                );
+            } catch (err) {
+                setError(err.message || "Something went wrong");
+            }
+        };
+        getcategories();
+    }, []);
 
 
     useEffect(() => {
@@ -48,6 +66,8 @@ export default function ProductList() {
                 setLoading(false);
             }
         };
+
+
 
         fetchData();
     }, [currentPage, debouncedFilters]);
@@ -88,7 +108,7 @@ export default function ProductList() {
         <Container className="py-5">
             <ProductFilters
                 filtersn={filters}
-                categories={[{ id: 1, name: "Clothes" }, { id: 2, name: "Electronics" }, { id: 3, name: "Furniture" }, { id: 4, name: "Shoes" }]}
+                categories={categories}
                 onFilterChange={setFilters}
             />
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
