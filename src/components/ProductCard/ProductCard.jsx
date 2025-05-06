@@ -7,7 +7,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
   return (
     <div className="card-product style-4 rounded">
       <div className="card-product-wrapper radius-16 line-2">
-        <a href="product-detail.html" className="product-img">
+        <Link to={`/products/${product.id}`} className="product-img">
           <img
             className="img-product"
             src={product.images?.[0] || product.image}
@@ -15,10 +15,10 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           />
           <img
             className="img-hover"
-            src={product.images?.[1] || product.image}
+            src={product.images?.[1] || product.images?.[0] || product.image }
             alt="image-product"
           />
-        </a>
+        </Link>
         <ul className="list-product-btn">
           <li>
 
