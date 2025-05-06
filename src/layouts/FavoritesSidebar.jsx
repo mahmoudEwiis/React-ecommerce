@@ -1,5 +1,4 @@
 import React from 'react';
-import './Sidebar.css';
 import { Button, Card } from 'react-bootstrap';
 
 export default function FavoritesSidebar({ show, onClose, favorites = [], onRemove }) {
