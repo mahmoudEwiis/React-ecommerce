@@ -10,9 +10,24 @@ export default function CartSidebar({ show, onClose, cartItems = [], onRemove })
                 <h5 className="mb-0">Cart</h5>
                 <button className="btn-close" onClick={onClose}></button>
             </div>
-            <div className="sidebar-body p-3">
+            <div className="sidebar-body p-3  h-100">
                 {cartItems.length === 0 ? (
-                    <p>Your cart is empty.</p>
+                    <>
+                        <div className="row align-items-center  h-100 text-center">
+                            <div class="col-12">
+                                <div class="empty-info">
+                                    <div class="section-capture" data-animate="animate__fadeIn">
+                                        <div class="section-title">
+                                            <h2 class="section-heading">No Cart item yet</h2>
+                                        </div>
+                                    </div>
+                                    <img src="/empty-wish.png" class="width-160 img-fluid meb-26" alt="empty-wish" data-animate="animate__fadeIn" width="160" height="160" />
+                                    <h6 class="font-18" data-animate="animate__fadeIn">Sorry your wishlist has currently no more products, click on 'explore products' button given below for continue browsing.</h6>
+                                    <a href="collection.html" class="btn-style secondary-btn mst-25" data-animate="animate__fadeIn">Explore products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </>
                 ) : (
                     cartItems.map(item => (
                         <Card className="mb-3" key={item.id}>

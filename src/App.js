@@ -7,7 +7,9 @@ import Cart from './features/cart/Cart';
 import MainLayout from './layouts/MainLayout';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
+
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 

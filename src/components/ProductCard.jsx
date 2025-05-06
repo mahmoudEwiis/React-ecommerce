@@ -35,7 +35,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           </Tippy>
 
           <Tippy content="View Details" placement="left">
-            <Link to={`/products/${product.id}`} style={{paddingTop: "3px" }} className="btn btn-light icon-btn">
+            <Link to={`/products/${product.id}`} style={{ paddingTop: "3px" }} className="btn btn-light icon-btn">
               👁️
             </Link>
           </Tippy>

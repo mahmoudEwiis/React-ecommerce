@@ -213,7 +213,7 @@ export default function ProductFilters({ filtersn ,  categories = [], onFilterCh
 
   return (
     <Form className="mb-4 p-3 bg-light rounded shadow-sm">
-      <Row className="gy-3">
+      <Row className="gy-3 align-items-center">
         <Col md={3}>
           <Form.Group controlId="category">
             <Form.Label>Category</Form.Label>

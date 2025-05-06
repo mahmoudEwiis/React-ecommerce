@@ -21,3 +21,14 @@
 .icon-btn:hover {
     transform: scale(1.1);
 }
+
+ul, li {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}

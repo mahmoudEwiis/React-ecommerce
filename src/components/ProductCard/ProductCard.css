@@ -1,0 +1,382 @@
+.card-product-wrapper {
+    aspect-ratio: calc(342 / 486);
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.card-product-wrapper img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition-duration: 700ms;
+}
+
+.card-product-wrapper:hover .product-img .img-product {
+    opacity: 0;
+}
+
+.card-product-wrapper:hover .product-img .img-hover {
+    display: block;
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.product-img {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    align-items: stretch;
+}
+
+.product-img .img-hover {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+.list-product-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    top: 8px;
+    right: 8px;
+    z-index: 6;
+}
+
+.box-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.box-icon .icon {
+    font-size: 14px;
+}
+
+.box-icon:hover {
+    background-color: #000 !important;
+    color: #fff;
+    border-color: #000;
+}
+
+.text-quantity {
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: block;
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* Converted from SCSS to CSS */
+.card-product.style-border-2 .card-product-wrapper {
+    padding: 16px 15px 32px;
+  }
+  .card-product.style-border-2 .card-product-info {
+    padding: 0 16px 32px;
+    gap: 16px;
+  }
+  .card-product.style-border-2 .on-sale-wrap {
+    top: 26px;
+    left: 26px;
+    right: auto;
+  }
+  .card-product.style-border-2.border-type-2 .card-product-info {
+    padding: 0 16px 42px;
+  }
+  .card-product.style-border-2.border-type-3 .card-product-info {
+    padding: 0 16px 24px;
+  }
+  .card-product.style-border-2.border-type-2 .card-product-wrapper,
+  .card-product.style-border-2.border-type-3 .card-product-wrapper {
+    padding: 15px;
+    padding-bottom: 20px;
+  }
+  .card-product.style-border-2.border-type-5 .card-product-wrapper {
+    padding: 20px;
+    padding-bottom: 32px;
+  }
+  .card-product.style-border-2.border-type-5 .card-product-info {
+    padding: 0 20px 20px;
+    gap: 24px;
+  }
+  .card-product.style-border .card-product-wrapper {
+    padding: 20px 20px 64px;
+    padding-top: 42px;
+  }
+  .card-product.style-border .card-product-info {
+    padding: 0 20px 40px;
+  }
+  .card-product.style-2.card-product-size .list-product-btn {
+    bottom: 62px;
+  }
+  .card-product.style-2 .list-product-btn {
+    bottom: 20px;
+  }
+  .card-product.style-2 .list-product-btn li {
+    transform: translateY(20px);
+  }
+  .card-product.style-2:hover .list-product-btn li {
+    transform: translateY(0px);
+  }
+  .card-product.card-product-size .list-product-btn {
+    bottom: 20px;
+  }
+  .card-product.style-3.card-product-size .product-btn-main {
+    bottom: 50px;
+  }
+  .card-product.style-3.card-product-size .list-product-btn {
+    bottom: 114px;
+  }
+  .card-product.style-3 .list-product-btn {
+    bottom: 84px;
+  }
+  .card-product.style-3 .list-product-btn li {
+    transform: translateY(20px);
+  }
+  .card-product.style-3:hover .list-product-btn li {
+    transform: translateY(0px);
+  }
+  .card-product.style-3:hover .product-btn-main {
+    transform: translateY(0px);
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0.1s;
+  }
+  .card-product .product-btn-main {
+    right: 24px;
+    left: 24px;
+    bottom: 20px;
+    transform: translateY(20px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .card-product .product-btn-main .btn-main-product {
+    padding: 14px 15px;
+  }
+  .card-product .tooltip {
+    display: block;
+  }
+  .card-product .card-product-info .inner-info-product {
+    gap: 10px;
+  }
+  .card-product .variant-box {
+    padding: 10px 6px;
+  }
+  .card-product .countdown-box {
+    display: flex;
+  }
+  .card-product .countdown-box.style-2 {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  .card-product .list-product-btn {
+    top: 20px;
+    right: 20px;
+    gap: 16px;
+  }
+  .card-product .list-product-btn li {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+  }
+  .card-product .box-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .card-product .product-progress-sale {
+    gap: 8px;
+  }
+  .card-product:not(.style-list) .size-box {
+    transform: translateY(100%);
+    padding: 10px 6px;
+  }
+  .card-product:hover .list-product-btn li {
+    visibility: visible;
+    opacity: 1;
+  }
+  .card-product:hover .list-product-btn li:nth-child(1) {
+    transform: translateX(0);
+  }
+  .card-product:hover .list-product-btn li:nth-child(2) {
+    transform: translateX(0);
+    transition-delay: 0.1s;
+  }
+  .card-product:hover .list-product-btn li:nth-child(3) {
+    transform: translateX(0);
+    transition-delay: 0.2s;
+  }
+  .card-product:hover .list-product-btn li:nth-child(4) {
+    transform: translateX(0);
+    transition-delay: 0.3s;
+  }
+  .card-product:hover .size-box {
+    transform: translateY(0%);
+  }
+  .card-product.card-product-size:hover .countdown-box,
+  .card-product.style-2:hover .countdown-box,
+  .card-product.style-3:hover .countdown-box {
+    transform: translateY(100%);
+    bottom: -1px;
+  }
+  .card-product.style-list {
+    gap: 24px;
+  }
+  .card-product.style-list .card-product-wrapper {
+    aspect-ratio: 1 / 1.42;
+  }
+  .card-product.style-list .card-product-info {
+    gap: 24px;
+  }
+  .card-product.style-list .info-list {
+    gap: 15px;
+  }
+  .card-product.style-center .card-product-info {
+    padding: 20px 20px 35px;
+  }
+  .card-product.style-center .list-color-item {
+    width: 38px;
+    height: 38px;
+    gap: 7px;
+  }
+  .card-product.style-4 .card-product-info {
+    padding: 24px 16px;
+  }
+  .card-product.style-5 .card-product-info .btn-addcart {
+    padding: 0 27px;
+  }
+  .card-product.style-space .card-product-wrapper {
+    padding: 15px 16px 32px;
+  }
+  .card-product.style-space .card-product-info {
+    padding: 0 16px 32px;
+    gap: 16px;
+  }
+  .card-product.style-space-2 .card-product-wrapper {
+    padding: 15px 16px 20px;
+  }
+  .card-product.style-space-2 .card-product-info {
+    padding: 0 16px 20px;
+    gap: 16px;
+  }
+  .card-product .list-capacity-product .list-color-item .text-quantity {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+  }
+  
+
+
+
+  .hover-tooltip {
+    position: relative;
+  }
+  
+  .hover-tooltip .tooltip {
+    position: absolute;
+    white-space: nowrap;
+    padding: 0 10px;
+    height: 23px;
+    border-radius: 4px;
+    bottom: calc(100% + 8px);
+    transform: translateY(8px);
+    opacity: 0;
+    visibility: hidden;
+    color: var(--white);
+    width: max-content;
+    background-color: var(--dark);
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24),
+      -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    z-index: 100;
+    font-size: 10px;
+    line-height: 23px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .hover-tooltip .tooltip::before {
+    content: "";
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    top: 18px;
+    position: absolute;
+    background: var(--dark);
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+  }
+  
+  .hover-tooltip:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0.1s;
+  }
+  
+  .hover-tooltip.tooltip-bot .tooltip {
+    top: calc(100% + 8px);
+    bottom: auto;
+  }
+  
+  .hover-tooltip.tooltip-bot .tooltip::before {
+    top: -2px;
+  }
+  
+  .hover-tooltip.tooltip-left .tooltip {
+    right: 100%;
+    bottom: auto;
+    transform: translateX(0px);
+  }
+  
+  .hover-tooltip.tooltip-left .tooltip::before {
+    top: 50%;
+    left: auto;
+    transform: translateY(-50%) rotate(45deg);
+    right: -2px;
+  }
+  
+  .hover-tooltip.tooltip-left:hover .tooltip {
+    transform: translateX(-8px);
+  }
+  
+  .hover-tooltip.tooltip-right .tooltip {
+    left: 100%;
+    bottom: auto;
+    transform: translateX(0px);
+  }
+  
+  .hover-tooltip.tooltip-right .tooltip::before {
+    top: 50%;
+    right: auto;
+    transform: translateY(-50%) rotate(45deg);
+    left: -2px;
+  }
+  
+  .hover-tooltip.tooltip-right:hover .tooltip {
+    transform: translateX(8px);
+  }
+  

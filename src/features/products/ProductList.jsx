@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from './productsAPI';
 import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import useCart from '../../hooks/useCart';
 import useFavorites from '../../hooks/useFavorites';
 import ProductFilters from './ProductFilters';
 import useDebounce from '../../hooks/useDebounce';
 
 export default function ProductList() {
-      const [filters, setFilters] = useState({
+    const [filters, setFilters] = useState({
         categoryId: '',
         title: '',
-        priceRange: [1, 1000],
+        priceRange: [0, 1000],
         sort: '',
-      });
+    });
     const debouncedFilters = useDebounce(filters, 500);
 
     const [products, setProducts] = useState([]);
@@ -33,24 +33,24 @@ export default function ProductList() {
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            setLoading(true);
-            const offset = (currentPage - 1) * itemsPerPage;
-            const data = await getProducts({
-              limit: itemsPerPage,
-              offset: offset,
-              ...debouncedFilters, 
-            });
-            setProducts(data);
-          } catch (err) {
-            setError(err.message || "Something went wrong");
-          } finally {
-            setLoading(false);
-          }
+            try {
+                setLoading(true);
+                const offset = (currentPage - 1) * itemsPerPage;
+                const data = await getProducts({
+                    limit: itemsPerPage,
+                    offset: offset,
+                    ...debouncedFilters,
+                });
+                setProducts(data);
+            } catch (err) {
+                setError(err.message || "Something went wrong");
+            } finally {
+                setLoading(false);
+            }
         };
-      
+
         fetchData();
-          }, [currentPage, debouncedFilters]);
+    }, [currentPage, debouncedFilters]);
 
 
 
@@ -87,8 +87,8 @@ export default function ProductList() {
     return (
         <Container className="py-5">
             <ProductFilters
-                filtersn = {filters}
-                categories={[{ id: 1, name: "Clothes" }, { id: 2, name: "Electronics" } , { id: 3, name: "Furniture" } , { id: 4, name: "Shoes" }]}
+                filtersn={filters}
+                categories={[{ id: 1, name: "Clothes" }, { id: 2, name: "Electronics" }, { id: 3, name: "Furniture" }, { id: 4, name: "Shoes" }]}
                 onFilterChange={setFilters}
             />
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
@@ -100,6 +100,12 @@ export default function ProductList() {
                             isFavorite={favorites.find((p) => p.id === product.id)}
                             toggleFavorite={toggleFavorite}
                         />
+                        {/* <ProductCard
+                            product={product}
+                            onAddToCart={addToCart}
+                            isFavorite={favorites.find((p) => p.id === product.id)}
+                            toggleFavorite={toggleFavorite}
+                        /> */}
                     </Col>
                 ))}
             </Row>
