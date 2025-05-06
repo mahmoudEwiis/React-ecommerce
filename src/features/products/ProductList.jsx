@@ -8,7 +8,12 @@ import ProductFilters from './ProductFilters';
 import useDebounce from '../../hooks/useDebounce';
 
 export default function ProductList() {
-    const [filters, setFilters] = useState({});
+      const [filters, setFilters] = useState({
+        categoryId: '',
+        title: '',
+        priceRange: [1, 10000],
+        sort: '',
+      });
     const debouncedFilters = useDebounce(filters, 500);
 
     const [products, setProducts] = useState([]);
@@ -19,37 +24,12 @@ export default function ProductList() {
     const { addToCart } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
 
-
-
     const itemsPerPage = 8;
-
-    // const fetchData = async () => {
-    //     try {
-    //         setLoading(true);
-    //         const offset = (currentPage - 1) * itemsPerPage;
-    //         const data = await getProducts({ limit: itemsPerPage, offset: offset  , ...filters});
-    //         setProducts(data);
-    //     } catch (err) {
-    //         setError(err.message || "Something went wrong");
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-
-    //     fetchData();
-    // }, [currentPage]);
 
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
 
-
-    // useEffect(() => {
-    //     // fetchData();
-    //     console.log(filters)
-    // }, [filters]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,7 +50,7 @@ export default function ProductList() {
         };
       
         fetchData();
-          }, [currentPage, JSON.stringify(debouncedFilters)]);
+          }, [currentPage, debouncedFilters]);
 
 
 
@@ -107,6 +87,7 @@ export default function ProductList() {
     return (
         <Container className="py-5">
             <ProductFilters
+                filtersn = {filters}
                 categories={[{ id: 1, name: "Clothes" }, { id: 2, name: "Electronics" } , { id: 3, name: "Furniture" } , { id: 4, name: "Shoes" }]}
                 onFilterChange={setFilters}
             />
@@ -116,7 +97,7 @@ export default function ProductList() {
                         <ProductCard
                             product={product}
                             onAddToCart={addToCart}
-                            isFavorite={favorites.find((p) => p.id == product.id)}
+                            isFavorite={favorites.find((p) => p.id === product.id)}
                             toggleFavorite={toggleFavorite}
                         />
                     </Col>

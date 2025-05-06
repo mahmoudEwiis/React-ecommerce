@@ -1,7 +1,7 @@
 import axiosInstance from '../../services/axiosInstance';
 
 
-export const getProducts = async ({ limit = 8, offset = 0, categoryId, minPrice, maxPrice, title }) => {
+export const getProducts = async ({ limit = 8, offset = 0, categoryId, priceRange , title }) => {
   try {
 
     const params = {
@@ -10,11 +10,10 @@ export const getProducts = async ({ limit = 8, offset = 0, categoryId, minPrice,
     };
 
     if (categoryId) params.categoryId = categoryId;
-    if (minPrice) params.price_min = minPrice;
-    if (maxPrice) params.price_max = maxPrice;
+    if (priceRange) params.price_min = priceRange[0];
+    if (priceRange) params.price_max = priceRange[1];
     if (title) params.title = title;
 
-    console.log(params)
     const response = await axiosInstance.get(`/products`, { params });
 
     return response.data;

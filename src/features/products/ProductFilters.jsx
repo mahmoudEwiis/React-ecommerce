@@ -194,13 +194,9 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 
-export default function ProductFilters({ categories = [], onFilterChange }) {
-  const [filters, setFilters] = useState({
-    categoryId: '',
-    // title: '',
-    // priceRange: [0, 1000],
-    // sort: '',
-  });
+export default function ProductFilters({ filtersn ,  categories = [], onFilterChange }) {
+
+  const [filters, setFilters] = useState(filtersn);
 
   useEffect(() => {
     onFilterChange(filters);
@@ -229,7 +225,7 @@ export default function ProductFilters({ categories = [], onFilterChange }) {
             </Form.Select>
           </Form.Group>
         </Col>
-{/* 
+
         <Col md={3}>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
@@ -249,7 +245,7 @@ export default function ProductFilters({ categories = [], onFilterChange }) {
             <Slider
               range
               min={0}
-              max={1000}
+              max={10000}
               value={filters.priceRange}
               onChange={handlePriceChange}
             />
@@ -267,7 +263,7 @@ export default function ProductFilters({ categories = [], onFilterChange }) {
               <option value="price_desc">Price (High → Low)</option>
             </Form.Select>
           </Form.Group>
-        </Col> */}
+        </Col>
         
       </Row>
     </Form>
