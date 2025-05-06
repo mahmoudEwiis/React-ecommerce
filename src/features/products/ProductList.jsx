@@ -11,7 +11,7 @@ export default function ProductList() {
       const [filters, setFilters] = useState({
         categoryId: '',
         title: '',
-        priceRange: [1, 10000],
+        priceRange: [1, 1000],
         sort: '',
       });
     const debouncedFilters = useDebounce(filters, 500);

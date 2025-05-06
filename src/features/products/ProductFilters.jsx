@@ -245,7 +245,7 @@ export default function ProductFilters({ filtersn ,  categories = [], onFilterCh
             <Slider
               range
               min={0}
-              max={10000}
+              max={1000}
               value={filters.priceRange}
               onChange={handlePriceChange}
             />
