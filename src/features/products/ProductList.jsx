@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getProductCategories, getProducts } from './productsAPI';
 import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import useCart from '../../hooks/useCart';
-import useFavorites from '../../hooks/useFavorites';
+// import useCart from '../../hooks/useCart';
+import { useCart } from '../../context/CartContext';
+import {useFavorites} from '../../context/FavoritesContext';
 import ProductFilters from './ProductFilters';
 import useDebounce from '../../hooks/useDebounce';
 
@@ -22,7 +23,7 @@ export default function ProductList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const { addToCart } = useCart();
+    const {  cartItems,addToCart } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
 
     const itemsPerPage = 8;
@@ -72,6 +73,11 @@ export default function ProductList() {
         fetchData();
     }, [currentPage, debouncedFilters]);
 
+    useEffect(() => {
+        console.log('change in cartItems from product List')
+
+    }, [cartItems])
+    
 
 
     if (loading) {

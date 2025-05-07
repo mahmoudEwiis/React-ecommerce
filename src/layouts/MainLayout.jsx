@@ -2,25 +2,22 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
-import useCart from '../hooks/useCart';
-import useFavorites from '../hooks/useFavorites';
+// import useFavorites from '../hooks/useFavorites';
 import CartSidebar from '../components/CartSidebar/CartSidebar';
-import FavoritesSidebar from './FavoritesSidebar';
+import FavoritesSidebar from '../components/FavoritesSidebar/FavoritesSidebar';
 
 export default function MainLayout({ children }) {
     const location = useLocation();
     const minimalRoutes = ['/login', '/register'];
     const isMinimal = minimalRoutes.includes(location.pathname);
-    const { cartItems, setCartItems, removeFromCart, useCartListener } = useCart();
-    const { favorites, removeFromFavorites } = useFavorites();
+    // const { favorites, removeFromFavorites } = useFavorites();
 
     const [showCart, setShowCart] = useState(false);
     const [showFavorites, setShowFavorites] = useState(false);
 
-    const handleToggleCart = () =>{ console.log('hi'); setShowCart(prev => !prev)};
-    const handleToggleFavorites = () => setShowFavorites(prev => !prev);
+    const handleToggleCart = () =>  setShowCart(prev => !prev);
+    const handleToggleFavorites = () => { console.log('hi') ; setShowFavorites(prev => !prev);}
 
-    useCartListener(setCartItems)
 
     if (isMinimal) {
         return <>{children}</>;
@@ -43,39 +40,14 @@ export default function MainLayout({ children }) {
                 © {new Date().getFullYear()} MyShop. All rights reserved.
             </footer>
 
-            {/* <CartSidebar
-                show={showCart}
-                onClose={() => setShowCart(false)}
-                cartItems={cartItems}
-                onRemove={removeFromCart}
-            /> */}
 
-            <CartSidebar
-                isOpen={showCart}
-                onClose={() => setShowCart(false)}
-                cartList={cartItems}
-                removeCartItem={removeFromCart}
-                updateCartItemQuantity={(item, action) => {
-                    const updatedItems = cartItems.map(ci =>
-                        ci.id === item.id
-                            ? { ...ci, quantity: action === '+' ? ci.quantity + 1 : ci.quantity - 1 }
-                            : ci
-                    ).filter(ci => ci.quantity > 0);
-                    setCartItems(updatedItems);
-                }}
-                navigateToProductDetails={(id) => {
-                    window.location.href = `/products/${id}`;
-                }}
-                navigateToCheckout={() => {
-                    window.location.href = `/checkout`;
-                }} />
+            <CartSidebar isOpen={showCart} onClose={() => setShowCart(false)} />
 
-            {/* <FavoritesSidebar
-                show={showFavorites}
+
+            <FavoritesSidebar
+                isOpen={showFavorites}
                 onClose={() => setShowFavorites(false)}
-                favorites={favorites}
-                onRemove={removeFromFavorites}
-            /> */}
+            />
         </div>
     );
 }
