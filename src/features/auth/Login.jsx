@@ -7,13 +7,14 @@ import { Link } from 'react-router-dom';
 import { getProfile, login } from './authAPI';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useProfile } from '../../context/AuthContext';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [touched, setTouched] = useState({ email: false, password: false });
     const [showPassword, setShowPassword] = useState(false);
-
+    const { setProfile } =  useProfile();
     const navigate = useNavigate();
 
     const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
@@ -28,11 +29,13 @@ export default function Login() {
         setTouched({ email: true, password: true });
         if (emailValid && passwordValid) {
             try {
-                const { access_token } = await login({ email , password });
-                localStorage.setItem('token', access_token);
-
+                await login({ email , password });
+               
                 const profile =  await getProfile()
                 console.log(profile)
+                if(profile){
+                    setProfile(profile)
+                }
 
 
                 toast.success('Logged in!');
