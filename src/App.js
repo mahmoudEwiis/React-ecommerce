@@ -17,6 +17,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { AuthProvider } from './context/AuthContext';
+import Profile from './pages/Profile';
+import Favorites from './features/profile/Favorites';
 
 function App() {
   return (
@@ -44,6 +46,10 @@ function App() {
                     <Register />
                   </PublicRoute>
                 } />
+                <Route path="/profile" element={<Profile />}>
+                  {/* <Route path="orders" element={<Orders />} /> */}
+                  <Route path="favorites" element={<Favorites />} />
+                </Route>
               </Routes>
             </MainLayout>
           </FavoritesProvider>
