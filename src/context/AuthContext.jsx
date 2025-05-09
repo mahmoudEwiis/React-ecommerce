@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
         };
 
         if (localStorage.getItem('token')) {
+            console.log('hi')
             fetchProfile();
         }
     }, []);

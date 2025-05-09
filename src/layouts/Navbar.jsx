@@ -67,7 +67,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                   <img
                     className="avatar-img rounded-circle"
                     width={40}
-                    src={profile?.avatar || "/avatar.jpg" } 
+                    src={profile?.avatar || "/avatar.jpg"}
                     alt="avatar"
                     id="profileDropdown"
                     role="button"
@@ -87,7 +87,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                           <img
                             className="avatar-img rounded-circle shadow"
                             width={40}
-                            src={profile?.avatar || "/avatar.jpg" } 
+                            src={profile?.avatar || "/avatar.jpg"}
                             alt="avatar"
                           />
                         </div>
@@ -96,7 +96,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                             {profile?.name}
                           </a>
                           <p className="small m-0">
-                          {profile?.email}
+                            {profile?.email}
                           </p>
                         </div>
                       </div>
@@ -105,16 +105,16 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                     <li><hr className="dropdown-divider" /></li>
 
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <Link to="/profile" className="dropdown-item">
                         <i className="fa-regular fa-user me-2"></i>
                         My Profile
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        <i className="fa-solid fa-heart text-danger me-2"></i>
-                        My Wishlist
-                      </a>
+                      <Link to="/profile/favorites" className="dropdown-item">
+                      <i className="fa-solid fa-heart text-danger me-2"></i>
+                      My Wishlist
+                      </Link>
                     </li>
                     <li>
                       <button className="dropdown-item bg-danger-soft-hover text-danger" onClick={handleLogout}>

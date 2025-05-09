@@ -17,8 +17,12 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { AuthProvider } from './context/AuthContext';
-import Profile from './pages/Profile';
 import Favorites from './features/profile/Favorites';
+import ProfileLayout from './pages/ProfileLayout';
+import Profile from './features/profile/Profile';
+import ProductsTable from './features/profile/ProductsTable';
+import CategoriesTable from './features/profile/CategoriesTable';
+import UsersTable from './features/profile/UsersTable';
 
 function App() {
   return (
@@ -46,9 +50,12 @@ function App() {
                     <Register />
                   </PublicRoute>
                 } />
-                <Route path="/profile" element={<Profile />}>
-                  {/* <Route path="orders" element={<Orders />} /> */}
+                <Route path="/profile" element={<ProfileLayout  />}>
+                  <Route path="" element={<Profile />} />
                   <Route path="favorites" element={<Favorites />} />
+                  <Route path="products" element={<ProductsTable  />} />
+                  <Route path="users" element={<UsersTable />} />
+                  <Route path="categories" element={<CategoriesTable />} />
                 </Route>
               </Routes>
             </MainLayout>

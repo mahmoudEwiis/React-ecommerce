@@ -22,13 +22,28 @@
     transform: scale(1.1);
 }
 
-ul, li {
+ul,
+li {
     list-style-type: none;
     margin-bottom: 0;
     padding-left: 0;
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
+}
+
+.nav-link {
+    border-radius: 8px;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    background-color: #5243d976;
+}
+
+.nav-link.active {
+    color: #fff !important;
+    background-color: #5243d976;
 }
