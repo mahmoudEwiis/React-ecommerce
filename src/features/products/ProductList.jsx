@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { getProductCategories, getProducts } from './productsAPI';
+import { getProducts } from './productsAPI';
 import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
-import {useFavorites} from '../../context/FavoritesContext';
-import ProductFilters from './ProductFilters';
-import useDebounce from '../../hooks/useDebounce';
+import { useFavorites } from '../../context/FavoritesContext';
 
-export default function ProductList() {
-    const [filters, setFilters] = useState({
-        categoryId: '',
-        title: '',
-        priceRange: [0, 1000],
-        sort: '',
-    });
-    const debouncedFilters = useDebounce(filters, 500);
-
+export default function ProductList({ filters }) {
     const [products, setProducts] = useState([]);
-    const [categories, setcategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const {  cartItems,addToCart } = useCart();
+    const { addToCart } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
 
     const itemsPerPage = 8;
@@ -32,24 +21,6 @@ export default function ProductList() {
     }, [favorites]);
 
     useEffect(() => {
-        const getcategories = async () => {
-            try {
-                const data = await getProductCategories();
-                setcategories(
-                    data.map(item => ({
-                        id: item.id,
-                        name: item.name
-                    }))
-                );
-            } catch (err) {
-                setError(err.message || "Something went wrong");
-            }
-        };
-        getcategories();
-    }, []);
-
-
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
@@ -57,7 +28,7 @@ export default function ProductList() {
                 const data = await getProducts({
                     limit: itemsPerPage,
                     offset: offset,
-                    ...debouncedFilters,
+                    ...filters,
                 });
                 setProducts(data);
             } catch (err) {
@@ -67,12 +38,8 @@ export default function ProductList() {
             }
         };
 
-
-
         fetchData();
-    }, [currentPage, debouncedFilters]);
-
-
+    }, [currentPage, filters]);
 
     if (loading) {
         return (
@@ -90,7 +57,6 @@ export default function ProductList() {
         );
     }
 
-
     const paginationItems = [];
     for (let number = 1; number <= 8; number++) {
         paginationItems.push(
@@ -105,24 +71,41 @@ export default function ProductList() {
     }
 
     return (
-        <Container className="py-5">
-            <ProductFilters
-                filtersn={filters}
-                categories={categories}
-                onFilterChange={setFilters}
-            />
-            <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-                {products.map(product => (
-                    <Col key={product.id} className="position-relative">
-                        <ProductCard
-                            product={product}
-                            onAddToCart={addToCart}
-                            isFavorite={favorites.find((p) => p.id === product.id)}
-                            toggleFavorite={toggleFavorite}
-                        />
-                    </Col>
-                ))}
-            </Row>
+        <Container className="py-3">
+            {products.length === 0 ? (
+                <div className="text-center w-100 py-5">
+                    <svg
+                        width="120"
+                        height="120"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#6c757d"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="mb-4"
+                    >
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z" />
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                        <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
+                    <h4 className="text-muted">No products found</h4>
+                    <p className="text-secondary">Try adjusting your filters or check back later.</p>
+                </div>
+            ) : (
+                <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+                    {products.map(product => (
+                        <Col key={product.id} className="position-relative">
+                            <ProductCard
+                                product={product}
+                                onAddToCart={addToCart}
+                                isFavorite={favorites.find((p) => p.id === product.id)}
+                                toggleFavorite={toggleFavorite}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            )}
 
             <div className="d-flex justify-content-center mt-4">
                 <Pagination>{paginationItems}</Pagination>
