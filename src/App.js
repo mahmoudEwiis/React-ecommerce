@@ -8,6 +8,8 @@ import MainLayout from './layouts/MainLayout';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import './App.css';
 
 import PublicRoute from './components/PublicRoute';

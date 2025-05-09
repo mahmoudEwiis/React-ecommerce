@@ -32,11 +32,11 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
             onClick={onClose}
           >
             <p>Close</p>
-            <span role="img" aria-label="close" className="icon-close">
+            {/* <span role="img" aria-label="close" className="icon-close">
               <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
                 <path d="..."></path>
               </svg>
-            </span>
+            </span> */}
           </button>
         </div>
 
@@ -91,7 +91,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                   </button>
                 </div>
                 <div className="item-close-btn">
-                  <a
+                  {/* <a
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
@@ -101,7 +101,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                     <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
                       <path d="..."></path>
                     </svg>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             ))

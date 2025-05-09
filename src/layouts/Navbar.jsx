@@ -5,7 +5,6 @@ import { useProfile } from '../context/AuthContext';
 const Navbar = ({ onToggleCart, onToggleFavorites }) => {
   const navigate = useNavigate();
   const { profile } = useProfile();
-  console.log(profile)
   const isUserLogged = isLogged();
   const handkeBavigate = () => {
     navigate('/login');
@@ -59,69 +58,6 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
               className="text-primary me-3"
               onClick={onToggleCart}
             />
-            {/* <button className="btn btn-primary text-nowrap" onClick={handkeBavigate}>Sign in</button>
-
-
-            <li className="nav-item ms-3 dropdown">
-              <img
-                className="avatar-img rounded-circle"
-                width={40}
-                src="/avatar.jpg"
-                alt="avatar"
-                id="profileDropdown"
-                role="button"
-                data-bs-auto-close="outside"
-                data-bs-display="static"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              />
-
-              <ul
-                className="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
-                aria-labelledby="profileDropdown"
-              >
-                <li className="px-3 mb-3">
-                  <div className="d-flex align-items-center">
-                    <div className="avatar me-3">
-                      <img
-                        className="avatar-img rounded-circle shadow"
-                        width={40}
-                        src="/avatar.jpg"
-                        alt="avatar"
-                      />
-                    </div>
-                    <div>
-                      <a className="h6 mt-2 mt-sm-0" href="#">
-                        Lori Ferguson
-                      </a>
-                      <p className="small m-0">example@gmail.com</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li><hr className="dropdown-divider" /></li>
-
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i class="fa-regular fa-user me-2"></i>
-                    My Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i class="fa-solid fa-heart text-danger me-2"></i>
-                    My Wishlist
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item bg-danger-soft-hover " href="#">
-                    <i class="fa-solid fa-power-off me-2"></i>
-                    Sign Out
-                  </a>
-                </li>
-              </ul>
-            </li> */}
-
 
             {
               !isUserLogged ? (

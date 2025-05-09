@@ -25,21 +25,21 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
             <button onClick={() => onAddToCart(product)}
               className="bg-surface hover-tooltip tooltip-left box-icon">
               <i className="fas fa-shopping-cart"></i>
-              <span className="tooltip">Add to Cart</span>
+              <span className="tooltip bg-dark">Add to Cart</span>
             </button>
 
           </li>
           <li className="wishlist">
             <button onClick={() => toggleFavorite(product)}
               className="bg-surface hover-tooltip tooltip-left box-icon">
-              <i class="fa-regular fa-heart"></i>
-              <span className="tooltip">Add to Wishlist</span>
+              <i className="fa-regular fa-heart"></i>
+              <span className="tooltip bg-dark">Add to Wishlist</span>
             </button>
           </li>
           <li>
             <Link to={`/products/${product.id}`} className="bg-surface hover-tooltip tooltip-left box-icon">
               <i className="fa-solid fa-eye"></i>
-              <span className="tooltip">Quick View</span>
+              <span className="tooltip bg-dark">Quick View</span>
             </Link>
           </li>
         </ul>
@@ -50,7 +50,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           <Link to={`/products/${product.id}`} className=" d-block  text-dark name-product fw-medium text-md">
             {product.title}
           </Link>
-          <span class="badge bg-light text-dark border border-2 rounded-pill">{product.category?.name}</span>
+          <span className="badge bg-light text-dark border border-2 rounded-pill">{product.category?.name}</span>
         </div>
 
         <p className="price-wrap fw-medium ">

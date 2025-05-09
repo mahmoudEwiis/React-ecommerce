@@ -72,11 +72,6 @@ export default function ProductList() {
         fetchData();
     }, [currentPage, debouncedFilters]);
 
-    useEffect(() => {
-        console.log('change in cartItems from product List')
-
-    }, [cartItems])
-    
 
 
     if (loading) {
