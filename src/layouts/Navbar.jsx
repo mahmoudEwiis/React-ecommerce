@@ -7,8 +7,8 @@ import { useFavorites } from '../context/FavoritesContext';
 const Navbar = ({ onToggleCart, onToggleFavorites }) => {
   const navigate = useNavigate();
   const { profile } = useProfile();
-  const { cartItems} = useCart();
-  const { favorites} = useFavorites();
+  const { cartItems } = useCart();
+  const { favorites } = useFavorites();
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const isUserLogged = isLogged();
@@ -50,25 +50,20 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
           </ul>
 
           <div className="d-lg-flex col-lg-3 justify-content-lg-end align-items-center gap-3">
-            {cartCount}
-            <FaHeart
-              role="button"
-              title="Favorites"
-              size={20}
-              className="text-danger me-3"
-              onClick={onToggleFavorites}
-            />
-            <FaShoppingCart
-              role="button"
-              title="Cart"
-              size={20}
-              className="text-primary me-3"
-              onClick={onToggleCart}
-            />
+
+            <div className='navIcon mx-2' onClick={onToggleFavorites} >
+              <span class="badge badge-light">{favorites.length}</span>
+              <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <div className='navIcon mx-2' onClick={onToggleCart}>
+              <span class="badge badge-light">{cartCount}</span>
+              <i class="fa-solid fa-cart-plus"></i>
+            </div>
 
             {
               !isUserLogged ? (
-                <button className="btn btn-primary text-nowrap" onClick={handkeBavigate}>Sign in</button>
+                <button className="btn text-nowrap btn-login" onClick={handkeBavigate}>Sign in</button>
               ) : (
                 <li className="nav-item ms-3 dropdown">
                   <img

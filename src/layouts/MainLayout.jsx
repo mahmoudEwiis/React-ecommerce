@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import CartSidebar from '../components/CartSidebar/CartSidebar';
 import FavoritesSidebar from '../components/FavoritesSidebar/FavoritesSidebar';
+import './layout.css'
 
 export default function MainLayout({ children }) {
     const location = useLocation();
