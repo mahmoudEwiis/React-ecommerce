@@ -1,20 +1,21 @@
 
 import React, { useEffect, useState } from 'react';
 import './CartSidebar.css'
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import DeleteConfirmationModal from "../DeleteConfirmationModal";
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 const CartSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
-    const { cartItems, setCartItems, removeFromCart , updateCartItemQuantity} = useCart();
+    const [showModal, setShowModal] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
+    
+    const { cartItems, setCartItems, removeFromCart, updateCartItemQuantity } = useCart();
 
     const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    const [isVisible, setIsVisible] = useState(false);
-    const [selectedProductId, setSelectedProductId] = useState(null);
-    
+
     useEffect(() => {
         if (isOpen) {
             const stored = localStorage.getItem('cart');
@@ -23,32 +24,16 @@ const CartSidebar = ({ isOpen, onClose }) => {
             }
         }
     }, [isOpen]);
-    
-    const openConfirmModal = (productId) => {
-        setSelectedProductId(productId);
-        setIsVisible(true);
+
+    const handleDeleteClick = (product) => {
+        setProductToDelete(product);
+        setShowModal(true);
     };
 
-    const closeConfirmModal = () => {
-        setIsVisible(false);
-        setSelectedProductId(null);
+    const handleConfirmDelete = (id) => {
+        removeFromCart(id);
+        setShowModal(false);
     };
-
-    const deleteCartItem = () => {
-        if (selectedProductId) {
-            removeFromCart(selectedProductId);
-        }
-        closeConfirmModal();
-    };
-
-    // const updateCartItemQuantity = (item, action) => {
-    //     const updatedItems = cartItems.map(ci =>
-    //         ci.id === item.id
-    //             ? { ...ci, quantity: action === '+' ? ci.quantity + 1 : ci.quantity - 1 }
-    //             : ci
-    //     ).filter(ci => ci.quantity > 0);
-    //     setCartItems(updatedItems);
-    // };
 
 
     return (
@@ -106,16 +91,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="item-close-btn">
-                                    <a
-                                        href="#"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            openConfirmModal(cartItem.id);
-                                        }}
-                                    >
-                                        ×
-                                    </a>
+                                <div className="item-close-btn"
+                                    onClick={() => handleDeleteClick(cartItem)}>
+                                    <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </div>
                         ))
@@ -138,15 +116,13 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
             <div className={`mask ${!isOpen ? 'd-none' : ''}`} onClick={onClose}></div>
 
-            <ConfirmModal
-                isVisible={isVisible}
-                title="Confirm this action"
-                message="Are you sure to remove product from cart?"
-                confirmBtnText="Ok"
-                cancelBtnText="Cancel"
-                onConfirm={deleteCartItem}
-                onCancel={closeConfirmModal}
+            <DeleteConfirmationModal
+                show={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleConfirmDelete}
+                product={productToDelete}
             />
+
         </>
     );
 };

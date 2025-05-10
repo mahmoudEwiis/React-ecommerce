@@ -1,28 +1,30 @@
 import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 import { useState } from "react";
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import DeleteConfirmationModal from "../DeleteConfirmationModal";
 import './FavoritesSidebar.css'
 
 const FavoritesSidebar = ({ isOpen, onClose }) => {
   const { favorites, removeFromFavorites } = useFavorites();
-  const { addToCart, isInCart } = useCart(); 
-  const [confirmId, setConfirmId] = useState(null);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const { addToCart, isInCart } = useCart();
 
-  const handleDelete = (id) => {
-    setConfirmId(id);
-    setShowConfirm(true);
+  const [showModal, setShowModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+
+  const handleDeleteClick = (product) => {
+    setProductToDelete(product);
+    setShowModal(true);
   };
 
-  const confirmDelete = () => {
-    removeFromFavorites(confirmId);
-    setShowConfirm(false);
+  const handleConfirmDelete = (id) => {
+    removeFromFavorites(id);
+    setShowModal(false);
   };
+
 
   return (
     <>
-      <div className={`wishlist sidebar ${ isOpen ? "is-open" : ""}`}>
+      <div className={`wishlist sidebar ${isOpen ? "is-open" : ""}`}>
         <div className="sidebar-header">
           <div className="sidebar-title">Wishlist ({favorites.length})</div>
           <button
@@ -32,11 +34,6 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
             onClick={onClose}
           >
             <p>Close</p>
-            {/* <span role="img" aria-label="close" className="icon-close">
-              <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
-                <path d="..."></path>
-              </svg>
-            </span> */}
           </button>
         </div>
 
@@ -90,18 +87,9 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                     <span>Added to cart</span>
                   </button>
                 </div>
-                <div className="item-close-btn">
-                  {/* <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleDelete(item.id);
-                    }}
-                  >
-                    <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
-                      <path d="..."></path>
-                    </svg>
-                  </a> */}
+                <div className="item-close-btn "
+                  onClick={() => handleDeleteClick(item)}>
+                  <i class="fa-solid fa-xmark"></i>
                 </div>
               </div>
             ))
@@ -111,14 +99,11 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
 
       <div className={`mask ${!isOpen ? "d-none" : ""}`} onClick={onClose}></div>
 
-      <ConfirmModal
-        isVisible={showConfirm}
-        onConfirm={confirmDelete}
-        onCancel={() => setShowConfirm(false)}
-        title="Confirm this action"
-        message="Are you sure to remove product from wishlist?"
-        confirmBtnText="OK"
-        cancelBtnText="Cancel"
+      <DeleteConfirmationModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirmDelete}
+        product={productToDelete}
       />
     </>
   );
