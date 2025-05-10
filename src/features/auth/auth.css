@@ -46,10 +46,10 @@
   }
   
   input.is-invalid + .password-toggle-icon {
-    right: 2.5rem !important; 
+    right: .5rem !important; 
     top: 32%;
   }
 
   input.is-valid + .password-toggle-icon {
-    right: 2.5rem !important; 
+    right: .5rem !important; 
   }

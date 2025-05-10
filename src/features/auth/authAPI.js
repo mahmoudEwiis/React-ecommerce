@@ -33,7 +33,7 @@ import axiosInstance from '../../services/axiosInstance';
 export const login = async ({ email, password }) => {
   try {
     const response = await axiosInstance.post('/auth/login', { email, password });
-    
+
     const { access_token } = response.data;
     if (access_token) {
       localStorage.setItem('token', access_token);
@@ -77,4 +77,23 @@ export const uploadFiles = async (data) => {
     },
   });
   return response.data;
+};
+
+
+
+export const uploadToCloudinary = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "unsigned_upload");
+
+  const response = await fetch(
+    "https://api.cloudinary.com/v1_1/dfiui980m/image/upload",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  const data = await response.json();
+  return data.secure_url;
 };
