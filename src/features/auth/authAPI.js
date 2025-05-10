@@ -57,7 +57,7 @@ export const getProfile = async () => {
 };
 
 export const register = async (data) => {
-  const response = await axiosInstance.post('/register', data);
+  const response = await axiosInstance.post('/users', data);
   return response.data;
 };
 
@@ -68,4 +68,13 @@ export const isLogged = () => {
 
 export const logout = () => {
   localStorage.removeItem('token');
+};
+
+export const uploadFiles = async (data) => {
+  const response = await axiosInstance.post('/files/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
 };
