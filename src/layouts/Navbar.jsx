@@ -2,9 +2,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { isLogged, logout } from '../features/auth/authAPI';
 import { useProfile } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 const Navbar = ({ onToggleCart, onToggleFavorites }) => {
   const navigate = useNavigate();
   const { profile } = useProfile();
+  const { cartItems} = useCart();
+  const { favorites} = useFavorites();
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   const isUserLogged = isLogged();
   const handkeBavigate = () => {
     navigate('/login');
@@ -44,6 +50,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
           </ul>
 
           <div className="d-lg-flex col-lg-3 justify-content-lg-end align-items-center gap-3">
+            {cartCount}
             <FaHeart
               role="button"
               title="Favorites"
@@ -112,8 +119,8 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                     </li>
                     <li>
                       <Link to="/profile/favorites" className="dropdown-item">
-                      <i className="fa-solid fa-heart text-danger me-2"></i>
-                      My Wishlist
+                        <i className="fa-solid fa-heart text-danger me-2"></i>
+                        My Wishlist
                       </Link>
                     </li>
                     <li>

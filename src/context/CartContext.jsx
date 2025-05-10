@@ -36,14 +36,15 @@ export const CartProvider = ({ children }) => {
         return cartItemExist;
     };
 
-    const updateCartItemQuantity = (id, action) => {
-        setCartItems(prev =>
-            prev.map(item =>
-                item.id === id
-                    ? { ...item, quantity: action === '+' ? item.quantity + 1 : item.quantity - 1 }
-                    : item
-            ).filter(item => item.quantity > 0)
-        );
+    const updateCartItemQuantity = (item, action) => {
+        const updatedItems = cartItems.map(ci =>
+            ci.id === item.id
+                ? { ...ci, quantity: action === '+' ? ci.quantity + 1 : ci.quantity - 1 }
+                : ci
+        ).filter(ci => ci.quantity > 0);
+        if(action === '+')  toast.success('Increase cart Item Quantity');
+        else toast.success('Decrease cart Item Quantity');
+        setCartItems(updatedItems);
     };
 
     return (

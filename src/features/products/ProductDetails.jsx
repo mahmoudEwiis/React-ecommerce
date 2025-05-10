@@ -1,30 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap';
-import { FaHeart, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
-import { getProductById } from '../products/productsAPI';
+import { FaChevronLeft, FaChevronRight, FaHeart, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
+import { getProductById, getProductsByCategory } from '../products/productsAPI';
 
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
 
 import Slider from 'react-slick';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 export default function ProductDetails() {
     const { id } = useParams();
+    const relatedSliderRef = useRef(null);
+
     const [product, setProduct] = useState(null);
+    const [related, setRelated] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { addToCart } = useCart();
+    const { addToCart, isInCart, updateCartItemQuantity, cartItems } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
+
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
     const slider2 = useRef(null);
 
-    const [zoom, setZoom] = useState({
-        active: false,
-        x: 0,
-        y: 0
-    });
+    const [zoom, setZoom] = useState({ active: false, x: 0, y: 0 });
 
     const handleMouseMove = e => {
         const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -42,6 +43,11 @@ export default function ProductDetails() {
             try {
                 const data = await getProductById(id);
                 setProduct(data);
+                if (data.category?.id) {
+                    const relatedData = await getProductsByCategory(data.category.id);
+                    const filtered = relatedData.filter(p => p.id !== data.id);
+                    setRelated(filtered);
+                }
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -56,6 +62,16 @@ export default function ProductDetails() {
     if (!product) return null;
 
     const images = product.images?.length ? product.images : [product.thumbnail];
+    const inCart = isInCart(product);
+    const quantity = cartItems.find(item => item.id === product.id)?.quantity || 1;
+
+
+    const relatedSettings = {
+        slidesToShow: 5,
+        infinite: true,
+        arrows: false,
+        autoplay: false,
+    };
 
     return (
         <Container className="py-5">
@@ -89,7 +105,7 @@ export default function ProductDetails() {
                         </Slider>
                     </div>
 
-                    <div className="flex-grow-1 text-center w-75" style={{ width: '100%', maxWidth: '100%' }}>
+                    <div className="flex-grow-1 text-center w-75">
                         <Slider
                             asNavFor={nav2}
                             ref={(slider) => {
@@ -122,23 +138,75 @@ export default function ProductDetails() {
 
                 <Col md={6}>
                     <h2>{product.title}</h2>
-
                     <p className="text-muted">Category:
                         <span className="badge bg-light text-dark border border-2 rounded-pill mx-2">{product.category?.name}</span>
                     </p>
-                    
                     <h4 className="text-primary">${product.price}</h4>
-                    <p>{product.description}</p>
-                    <div className="d-flex align-items-center mt-4">
-                        <Button variant="outline-primary" className="me-3" onClick={() => addToCart(product)}>
-                            <FaShoppingCart className="me-1" /> Add to Cart
-                        </Button>
+                    <p className='mb-4 text-muted'>{product.description}</p>
+
+                    <div className="d-flex align-items-center gap-2 mt-4">
+                        {inCart ? (
+                            <>
+                                <Button variant="outline-secondary" onClick={() => updateCartItemQuantity(product, '-')}>-</Button>
+                                <span>{quantity}</span>
+                                <Button variant="outline-secondary" onClick={() => updateCartItemQuantity(product, '+')}>+</Button>
+                                <Button variant="success" disabled>Added to Cart</Button>
+                            </>
+                        ) : (
+                            <Button variant="outline-primary" onClick={() => addToCart(product)}>
+                                <FaShoppingCart className="me-1" /> Add to Cart
+                            </Button>
+                        )}
+
                         <Button variant="outline-danger" onClick={() => toggleFavorite(product)}>
-                            {favorites.find((item) => item.id === product.id) ? <FaHeart /> : <FaRegHeart />} Favorite
+                            {favorites.find(item => item.id === product.id) ? <FaHeart /> : <FaRegHeart />} Favorite
                         </Button>
                     </div>
                 </Col>
             </Row>
+
+            {related.length > 0 && (
+                <div className="mt-5">
+                    <div className="d-flex justify-content-between align-items-center p-2">
+                        <h4 className="mb-3">More in {product.category.name}</h4>
+                        <div>
+                            <Button
+                                variant="outline-secondary"
+                                size="sm"
+                                className="me-2"
+                                onClick={() => relatedSliderRef.current.slickPrev()}
+                            >
+                                <FaChevronLeft />
+                            </Button>
+                            <Button
+                                variant="outline-secondary"
+                                size="sm"
+                                onClick={() => relatedSliderRef.current.slickNext()}
+                            >
+                                <FaChevronRight />
+                            </Button>
+                        </div>
+                    </div>
+
+                    <Slider
+                        ref={relatedSliderRef} {...relatedSettings}
+                    >
+                        {related.map(prod => (
+                            <div key={prod.id} className="px-2"
+                                onClick={() => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}>
+                                <ProductCard
+                                    product={prod}
+                                    onAddToCart={addToCart}
+                                    isFavorite={favorites.find((p) => p.id === product.id)}
+                                    toggleFavorite={toggleFavorite}
+                                />
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
+            )}
         </Container>
     );
 }

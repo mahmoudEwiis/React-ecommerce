@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
-// import useFavorites from '../hooks/useFavorites';
 import CartSidebar from '../components/CartSidebar/CartSidebar';
 import FavoritesSidebar from '../components/FavoritesSidebar/FavoritesSidebar';
 
@@ -10,13 +9,12 @@ export default function MainLayout({ children }) {
     const location = useLocation();
     const minimalRoutes = ['/login', '/register'];
     const isMinimal = minimalRoutes.includes(location.pathname);
-    // const { favorites, removeFromFavorites } = useFavorites();
 
     const [showCart, setShowCart] = useState(false);
     const [showFavorites, setShowFavorites] = useState(false);
 
     const handleToggleCart = () =>  setShowCart(prev => !prev);
-    const handleToggleFavorites = () => { console.log('hi') ; setShowFavorites(prev => !prev);}
+    const handleToggleFavorites = () =>  setShowFavorites(prev => !prev);
 
 
     if (isMinimal) {
