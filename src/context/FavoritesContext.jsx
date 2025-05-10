@@ -27,10 +27,10 @@ export const FavoritesProvider = ({ children }) => {
         setFavorites(prev => {
           const exists = prev.find(f => f.id === item.id);
           if (exists) {
-            toast.success('Added to favorites');
+            toast.success('Removed from favorites');
             return prev.filter(f => f.id !== item.id);
           } else {
-            toast.success('Removed from favorites');
+            toast.success('Added to favorites');
             return [...prev, item];
           }
         });
