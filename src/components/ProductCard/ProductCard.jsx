@@ -47,7 +47,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
       <div className="card-product-info">
 
         <div className="d-flex justify-content-between align-items-center mb-2">
-          <Link to={`/products/${product.id}`} className=" d-block  text-dark name-product fw-medium text-md">
+          <Link to={`/products/${product.id}`} className="name-product fw-medium text-md">
             {product.title}
           </Link>
           <span className="badge bg-light text-dark border border-2 rounded-pill">{product.category?.name}</span>
