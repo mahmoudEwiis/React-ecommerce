@@ -50,9 +50,9 @@ export default function Login() {
 
     return (
         <Container fluid className="vh-100 d-flex justify-content-center align-items-center">
-            <Row className="w-100 justify-content-center">
-                <Col xs={12} sm={8} md={6} lg={4}>
-                    <h2 className="mb-4 text-center">Login to Your Account</h2>
+            <Row className="w-100 justify-content-center ">
+                <Col xs={12} sm={8} md={6} lg={4} className='form-outLay'>
+                    <h2 className="mb-4 text-center">Login</h2>
                     <Form noValidate onSubmit={handleSubmit} className="w-100">
                         <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 form-floating-custom">
                             <Form.Control
@@ -92,7 +92,7 @@ export default function Login() {
                             </Form.Control.Feedback>
                         </FloatingLabel>
 
-                        <Button variant="primary" type="submit" className="w-100">
+                        <Button type="submit" className="w-100">
                             Login
                         </Button>
                         <div className="mt-3 text-center d-flex justify-content-center align-items-center gap-1">

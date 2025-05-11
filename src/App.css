@@ -1,3 +1,7 @@
+body{
+    background-color: #000;
+    color: #E3E3F0;
+}
 
 .product-card .icon-actions {
     opacity: 0;

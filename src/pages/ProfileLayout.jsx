@@ -4,7 +4,7 @@ import { useProfile } from "../context/AuthContext";
 export default function ProfileLayout() {
     const { profile } = useProfile();
     return (
-        <main className="pt-3">
+        <main className="py-5 my-4">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-4 col-xl-3">

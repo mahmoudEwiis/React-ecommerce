@@ -1,0 +1,45 @@
+.filters{
+    background-color: #6666AF;
+    color: aliceblue;
+}
+
+.customPagination{
+    --bs-pagination-color: #6666AF;
+    --bs-pagination-active-bg: #6666AF;
+    --bs-pagination-active-border-color: #6666AF;
+}
+
+
+.productDetials{
+    color:#E3E3F0;
+}
+.productDetials p{
+    color: #767676;
+}
+.productDetials .price{
+    color: #6666AF;
+}
+.productDetials .badge {
+    background-color: oklab(0.54 0.02 -0.11 / 0.39);
+    color: #6666AF;
+    border-color: #6666AF !important;
+    margin-bottom: 25px;
+}
+
+.productDetials .btnAddToCart {
+    color: #6666AF;
+    background-color: transparent;
+    border-color: #6666AF;
+}
+
+.productDetials .btnAddToCart.active{
+    color: white;
+    background-color: #6666AF;
+    border-color: #6666AF;
+}
+
+.productDetials .btnAddToCart:hover {
+    color: white;
+    background-color: #6666AF;
+    border-color: #6666AF;
+}

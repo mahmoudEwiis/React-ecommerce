@@ -4,6 +4,7 @@ import { Container, Row, Col, Spinner, Pagination, Alert } from 'react-bootstrap
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import './product.css';
 
 export default function ProductList({ filters }) {
     const [products, setProducts] = useState([]);
@@ -89,7 +90,7 @@ export default function ProductList({ filters }) {
                         <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                         <line x1="12" y1="22.08" x2="12" y2="12" />
                     </svg>
-                    <h4 className="text-muted">No products found</h4>
+                    <h4 className="text-white">No products found</h4>
                     <p className="text-secondary">Try adjusting your filters or check back later.</p>
                 </div>
             ) : (
@@ -108,7 +109,7 @@ export default function ProductList({ filters }) {
             )}
 
             <div className="d-flex justify-content-center mt-4">
-                <Pagination>{paginationItems}</Pagination>
+                <Pagination className='customPagination'>{paginationItems}</Pagination>
             </div>
         </Container>
     );

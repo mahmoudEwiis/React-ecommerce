@@ -76,7 +76,7 @@ export default function ProductDetails() {
     return (
         <Container className="py-5">
             <Link to="/" className="btn btn-link mb-4">← Back to Products</Link>
-            <Row>
+            <Row className='align-items-center'>
                 <Col md={6} className="d-flex">
                     <div style={{ width: "100px", marginRight: "15px" }}>
                         <Slider
@@ -136,24 +136,24 @@ export default function ProductDetails() {
                     </div>
                 </Col>
 
-                <Col md={6}>
+                <Col md={6} className='productDetials'>
                     <h2>{product.title}</h2>
-                    <p className="text-muted">Category:
-                        <span className="badge bg-light text-dark border border-2 rounded-pill mx-2">{product.category?.name}</span>
+                    <p>
+                        <span className="badge border border-2 rounded-pill mx-2">{product.category?.name}</span>
                     </p>
-                    <h4 className="text-primary">${product.price}</h4>
-                    <p className='mb-4 text-muted'>{product.description}</p>
+                    <h4 className="price">${product.price}</h4>
+                    <p className='mb-4'>{product.description}</p>
 
                     <div className="d-flex align-items-center gap-2 mt-4">
                         {inCart ? (
                             <>
-                                <Button variant="outline-secondary" onClick={() => updateCartItemQuantity(product, '-')}>-</Button>
+                                <Button variant="outline-secondary" disabled={quantity === 1}  onClick={() => updateCartItemQuantity(product, '-')}  >-</Button>
                                 <span>{quantity}</span>
                                 <Button variant="outline-secondary" onClick={() => updateCartItemQuantity(product, '+')}>+</Button>
-                                <Button variant="success" disabled>Added to Cart</Button>
+                                <Button className='btnAddToCart active' disabled>Added to Cart</Button>
                             </>
                         ) : (
-                            <Button variant="outline-primary" onClick={() => addToCart(product)}>
+                            <Button className='btnAddToCart' onClick={() => addToCart(product)}>
                                 <FaShoppingCart className="me-1" /> Add to Cart
                             </Button>
                         )}
@@ -167,8 +167,8 @@ export default function ProductDetails() {
 
             {related.length > 0 && (
                 <div className="mt-5">
-                    <div className="d-flex justify-content-between align-items-center p-2">
-                        <h4 className="mb-3">More in {product.category.name}</h4>
+                    <div className="d-flex justify-content-between align-items-center p-2 my-4">
+                        <h4 className="">More in {product.category.name}</h4>
                         <div>
                             <Button
                                 variant="outline-secondary"

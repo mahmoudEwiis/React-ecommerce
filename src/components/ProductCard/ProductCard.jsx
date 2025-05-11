@@ -15,7 +15,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           />
           <img
             className="img-hover"
-            src={product.images?.[1] || product.images?.[0] || product.image }
+            src={product.images?.[1] || product.images?.[0] || product.image}
             alt="image-product"
           />
         </Link>
@@ -24,7 +24,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
 
             <button onClick={() => onAddToCart(product)}
               className="bg-surface hover-tooltip tooltip-left box-icon">
-              <i className="fas fa-shopping-cart"></i>
+              <i className="fas fa-shopping-cart text-white"></i>
               <span className="tooltip bg-dark">Add to Cart</span>
             </button>
 
@@ -32,13 +32,20 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           <li className="wishlist">
             <button onClick={() => toggleFavorite(product)}
               className="bg-surface hover-tooltip tooltip-left box-icon">
-              <i className="fa-regular fa-heart"></i>
-              <span className="tooltip bg-dark">Add to Wishlist</span>
+              {isFavorite ? (<>
+                <i className="fa-solid fa-heart text-white"></i>
+                <span className="tooltip bg-dark">Added to Wishlist</span>
+              </>) :
+                (<>
+                  <i className="fa-regular fa-heart text-white"></i>
+                  <span className="tooltip bg-dark">Add to Wishlist</span>
+                </>)}
+
             </button>
           </li>
           <li>
             <Link to={`/products/${product.id}`} className="bg-surface hover-tooltip tooltip-left box-icon">
-              <i className="fa-solid fa-eye"></i>
+              <i className="fa-solid fa-eye text-white"></i>
               <span className="tooltip bg-dark">Quick View</span>
             </Link>
           </li>
@@ -50,7 +57,7 @@ const ProductCard = ({ product, onAddToCart, isFavorite, toggleFavorite }) => {
           <Link to={`/products/${product.id}`} className="name-product fw-medium text-md">
             {product.title}
           </Link>
-          <span className="badge bg-light text-dark border border-2 rounded-pill">{product.category?.name}</span>
+          <span className="badge border border-2 rounded-pill">{product.category?.name}</span>
         </div>
 
         <p className="price-wrap fw-medium ">
