@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import CartSidebar from '../components/CartSidebar/CartSidebar';
@@ -17,6 +17,12 @@ export default function MainLayout({ children }) {
     const handleToggleCart = () =>  setShowCart(prev => !prev);
     const handleToggleFavorites = () =>  setShowFavorites(prev => !prev);
 
+    useEffect(() => {
+        document.body.style.overflow = showCart || showFavorites  ? 'hidden' : 'auto';
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, [showCart , showFavorites]);
 
     if (isMinimal) {
         return <>{children}</>;

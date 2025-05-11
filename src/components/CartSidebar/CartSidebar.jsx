@@ -41,11 +41,10 @@ const CartSidebar = ({ isOpen, onClose }) => {
     return (
         <>
             <div className={`cartlist sidebar ${isOpen ? 'is-open' : ''}`}>
-                <div className="sidebar-header">
-                    <div className="sidebar-title">Shopping cart ({cartCount})</div>
+                <div className="sidebar-header justify-content-between align-items-center">
+                    <div className="sidebar-title text-nowrap">Shopping cart ({cartCount})</div>
                     <button aria-label="Close" className="btn-close" onClick={onClose}>
-                        <p>Close</p>
-                        <span role="img" aria-label="close" className="icon-close">×</span>
+                        <span role="img" aria-label="close" className="icon-close"></span>
                     </button>
                 </div>
 

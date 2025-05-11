@@ -26,7 +26,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
   return (
     <>
       <div className={`wishlist sidebar ${isOpen ? "is-open" : ""}`}>
-        <div className="sidebar-header">
+        <div className="sidebar-header  justify-content-between align-items-center">
           <div className="sidebar-title">Wishlist ({favorites.length})</div>
           <button
             aria-label="Close"
@@ -34,7 +34,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
             style={{ "--scroll-bar": "17px" }}
             onClick={onClose}
           >
-            <p>Close</p>
+            <span role="img" aria-label="close" className="icon-close"></span>
           </button>
         </div>
 
