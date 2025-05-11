@@ -3,6 +3,7 @@ import ProductList from '../features/products/ProductList';
 import ProductFilters from '../features/products/ProductFilters';
 import { getProductCategories } from '../features/products/productsAPI';
 import useDebounce from '../hooks/useDebounce';
+import HeroSlider from '../features/home/hero/HeroSlider';
 
 export default function Home() {
   const [filters, setFilters] = useState({
@@ -29,13 +30,17 @@ export default function Home() {
 
   return (
     <>
-      <div className="container pt-5">
-        <ProductFilters
-          filtersn={filters}
-          categories={categories}
-          onFilterChange={setFilters}
-        />
-        <ProductList filters={debouncedFilters} />
+      <div className="container-fluid w-100 pt-4 px-0">
+        <HeroSlider />
+        <div className="container">
+          <ProductFilters
+            filtersn={filters}
+            categories={categories}
+            onFilterChange={setFilters}
+          />
+          <ProductList filters={debouncedFilters} />
+        </div>
+
       </div>
 
     </>

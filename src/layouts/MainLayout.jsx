@@ -30,7 +30,7 @@ export default function MainLayout({ children }) {
             </header>
 
 
-            <main className="flex-grow container mt-5 py-4">
+            <main className="flex-grow pt-5 py-4">
                 {children}
             </main>
 
