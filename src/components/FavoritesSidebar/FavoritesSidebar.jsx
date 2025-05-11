@@ -2,6 +2,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 import { useState } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal";
+import '../../styles/sidebar.css'
 import './FavoritesSidebar.css'
 
 const FavoritesSidebar = ({ isOpen, onClose }) => {

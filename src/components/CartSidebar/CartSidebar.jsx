@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import './CartSidebar.css'
+
 import DeleteConfirmationModal from "../DeleteConfirmationModal";
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/sidebar.css'
+import './CartSidebar.css'
 
 const CartSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
