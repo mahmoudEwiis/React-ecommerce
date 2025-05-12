@@ -1,9 +1,16 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useProfile } from "../context/AuthContext";
 import '../features/profile/profile.css';
+import { logout } from "../features/auth/authAPI";
 
 export default function ProfileLayout() {
   const { profile } = useProfile();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   if (!profile) {
     return (
@@ -42,7 +49,7 @@ export default function ProfileLayout() {
                   { to: 'favorites', icon: 'fa-heart', label: 'Favorites' },
                   { to: 'products', icon: 'fa-box-open', label: 'Products', adminOnly: true },
                   { to: 'categories', icon: 'fa-list', label: 'Categories', adminOnly: true },
-                  { to: 'users', icon: 'fa-users', label: 'Users', adminOnly: true }
+                  { to: 'users', icon: 'fa-users', label: 'Users', adminOnly: true },
                 ]
                   .filter(item => !item.adminOnly || profile?.role === 'admin')
                   .map((item) => (
@@ -59,6 +66,16 @@ export default function ProfileLayout() {
                       </NavLink>
                     </li>
                   ))}
+
+                <li className="nav-item px-3">
+                  <button
+                    className="nav-link text-danger d-flex align-items-center bg-transparent border-0 px-0"
+                    onClick={handleLogout}
+                  >
+                    <i className="fa-solid fa-power-off me-2"></i>
+                    Sign Out
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
