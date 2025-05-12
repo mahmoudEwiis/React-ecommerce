@@ -65,7 +65,6 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                     className="item-title"
                     onClick={(e) => {
                       e.preventDefault();
-                      // navigate to product details
                     }}
                   >
                     {item.title}
