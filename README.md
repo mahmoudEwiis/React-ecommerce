@@ -113,7 +113,7 @@ cd React-ecommerce
 npm install
 
 # 3. Run the development server
-npm run dev
+npm run Start
 
 # App will be available at http://localhost:5173
 ```
