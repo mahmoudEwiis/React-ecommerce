@@ -34,10 +34,13 @@ This project is a modern e-commerce frontend built using React. It allows users 
 git clone https://github.com/mahmoudEwiis/React-ecommerce.git
 cd React-ecommerce
 
-# 2. Install dependencies
+# 2. create a .env file in the root directory
+REACT_APP_API_URL=https://api.escuelajs.co/api/v1
+
+# 3. Install dependencies
 npm install
 
-# 3. Run the development server
+# 4. Run the development server
 npm run Start
 
 # App will be available at http://localhost:5173
@@ -72,22 +75,6 @@ This project consumes the [Platzi Fake Store API](https://api.escuelajs.co/), wh
 
 🧪 You can explore the full Swagger documentation here:  
 https://api.escuelajs.co/docs/
-
----
-
-## 🏃‍♂️ Running the Project Locally
-
-1. Clone the repository.
-2. Make sure you have Node.js installed.
-3. Run:
-
-```bash
-npm install
-npm run dev
-```
-
-4. Open your browser and go to:  
-[http://localhost:5173](http://localhost:5173)
 
 ---
 
