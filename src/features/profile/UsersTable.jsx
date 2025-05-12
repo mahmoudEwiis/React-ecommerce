@@ -181,7 +181,7 @@ const UsersTable = () => {
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Users Table</h4>
-        <Button variant="primary" onClick={handleAddClick}>Add User</Button>
+        <Button  className="btn btn-add" onClick={handleAddClick}>Add User</Button>
       </div>
 
       <Table variant="dark" bordered hover responsive>

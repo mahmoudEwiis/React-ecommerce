@@ -84,7 +84,7 @@ export default function CategoriesTable() {
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Categories Table</h4>
-        <Button variant="primary" onClick={handleAddClick}>Add Category</Button>
+        <Button  className="btn btn-add"onClick={handleAddClick}>Add Category</Button>
       </div>
 
       <Table variant="dark" bordered hover responsive>
