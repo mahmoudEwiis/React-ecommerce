@@ -1,6 +1,12 @@
-# React E-Commerce Project
+# 🛒 React Ecommerce App
 
-A responsive and dynamic e-commerce web application built with React and Bootstrap. It supports authentication, product management, a shopping cart, and user roles with protected routes.
+A full-featured e-commerce web application built with React. It provides a seamless shopping experience for users, including authentication, cart and wishlist management, and an admin dashboard for product, category, and user management.
+
+---
+
+## 📌 Description
+
+This project is a modern e-commerce frontend built using React. It allows users to register, log in, browse products, manage favorites and shopping carts, and update their profiles. Admin users have access to an advanced dashboard to manage the entire store content.
 
 ---
 
