@@ -27,27 +27,6 @@ This project is a modern e-commerce frontend built using React. It allows users 
 
 ---
 
-## 🧪 Usage
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/mahmoudEwiis/React-ecommerce.git
-cd React-ecommerce
-
-# 2. create a .env file in the root directory
-REACT_APP_API_URL = 
-
-# 3. Install dependencies
-npm install
-
-# 4. Run the development server
-npm run Start
-
-# App will be available at http://localhost:5173
-```
-
----
-
 ## 🧱 Built With
 
 - [React](https://reactjs.org/)
@@ -78,4 +57,20 @@ https://api.escuelajs.co/docs/
 
 ---
 
-> Built by [@mahmoudEwiis](https://github.com/mahmoudEwiis) with 💻 and ❤️
+## 🧪 Usage
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/mahmoudEwiis/React-ecommerce.git
+cd React-ecommerce
+
+# 2. create a .env file in the root directory
+REACT_APP_API_URL = 
+
+# 3. Install dependencies
+npm install
+
+# 4. Run the development server
+npm run Start
+
+# App will be available at http://localhost:5173
