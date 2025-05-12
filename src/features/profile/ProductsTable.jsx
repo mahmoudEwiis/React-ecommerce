@@ -1,180 +1,124 @@
-// import { useState, useEffect } from "react";
-// import { Button, Table, Pagination } from "react-bootstrap";
-// import { getProducts } from "../products/productsAPI";
+import React, { useState, useEffect } from 'react';
+import { Button, Table, Pagination } from 'react-bootstrap';
+import { FaTrash, FaEdit } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import ProductModal from './ProductModal';
+import { getProducts} from '../products/productsAPI';
+import { addProduct, deleteProduct, updateProduct } from './ProfileApi';
 
-// const ProductsTable = () => {
-//   const [products, setProducts] = useState([]);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const itemsPerPage = 10;
-
-//   useEffect(() => {
-
-//     const fetchData = async () => {
-//       try {
-//         const data = await getProducts({
-//           limit: 100,
-//           offset: 0,
-//         });
-//         setProducts(data);
-//       } catch (err) {
-//         // setError(err.message || "Something went wrong");
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   const indexOfLastItem = currentPage * itemsPerPage;
-//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-//   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-//   const totalPages = Math.ceil(products.length / itemsPerPage);
-
-//   const handleDelete = (id) => {
-//     setProducts((prev) => prev.filter((item) => item.id !== id));
-//   };
-
-//   const handlePageChange = (page) => setCurrentPage(page);
-
-//   return (
-//     <div className="container mt-4 mx-auto">
-//       <h4 className="mb-3">Products Table</h4>
-//       <Table bordered hover responsive>
-//         <thead className="table-light">
-//           <tr>
-//             <th>ID</th>
-//             <th>Title</th>
-//             <th>Category</th>
-//             <th>Price ($)</th>
-//             <th>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {currentItems.map((product) => (
-//             <tr key={product.id}>
-//               <td>{product.id}</td>
-//               <td>{product.title}</td>
-//               <td>{product.category.name}</td>
-//               <td>{product.price}</td>
-//               <td>
-//                 <Button
-//                   variant="info"
-//                   size="sm"
-//                   className="me-2"
-//                   onClick={() => alert(`Details of product ID: ${product.id}`)}
-//                 >
-//                   Details
-//                 </Button>
-//                 <Button
-//                   variant="danger"
-//                   size="sm"
-//                   onClick={() => handleDelete(product.id)}
-//                 >
-//                   Delete
-//                 </Button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </Table>
-
-//       {/* Pagination */}
-//       <Pagination className="justify-content-center">
-//         {[...Array(totalPages)].map((_, index) => (
-//           <Pagination.Item
-//             key={index}
-//             active={index + 1 === currentPage}
-//             onClick={() => handlePageChange(index + 1)}
-//           >
-//             {index + 1}
-//           </Pagination.Item>
-//         ))}
-//       </Pagination>
-//     </div>
-//   );
-// };
-
-// export default ProductsTable;
-
-
-
-
-import { useState, useEffect } from "react";
-import { Button, Table, Pagination } from "react-bootstrap";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
-import { getProducts } from "../products/productsAPI";
-
-const ProductsTable = () => {
+export default function ProductsTable() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
-  const [productToDelete, setProductToDelete] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const data = await getProducts({ limit: 100, offset: 0 });
         setProducts(data);
-      } catch (err) { }
-    };
-    fetchData();
+      } catch (err) {
+        console.error(err);
+        toast.error('Failed to load products');
+      }
+    })();
   }, []);
 
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = page => setCurrentPage(page);
 
-  const handleDeleteClick = (product) => {
-    setProductToDelete(product);
-    setShowModal(true);
+  const handleAddClick = () => {
+    setEditingProduct(null);
+    setShowProductModal(true);
   };
 
-  const handleConfirmDelete = (id) => {
-    setProducts((prev) => prev.filter((item) => item.id !== id));
-    setShowModal(false);
+  const handleEditClick = product => {
+    setEditingProduct(product);
+    setShowProductModal(true);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const handleProductSubmit = async formData => {
+    try {
+      if (editingProduct) {
+        const updated = await updateProduct({ ...formData, id: editingProduct.id });
+        setProducts(prev => prev.map(p => p.id === updated.id ? updated : p));
+        toast.success('Product updated!');
+      } else {
+        const created = await addProduct(formData);
+        setProducts(prev => [created, ...prev]);
+        toast.success('Product added!');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Operation failed');
+    }
+    setShowProductModal(false);
+  };
+
+  const handleDeleteClick = product => {
+    setItemToDelete(product);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async id => {
+    try {
+      await deleteProduct(id);
+      setProducts(prev => prev.filter(p => p.id !== id));
+      toast.success('Product deleted!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Delete failed');
+    }
+    setShowDeleteModal(false);
+  };
+
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentItems = products.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   return (
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Products Table</h4>
-        <Button className="btn btn-add">Add Product</Button>
+        <Button className="btn btn-add" onClick={handleAddClick}>Add Product</Button>
       </div>
-      <Table bordered hover responsive>
-        <thead className="table-light">
+
+      <Table variant="dark" bordered hover responsive>
+        <thead className="table-dark">
           <tr>
             <th>ID</th>
             <th>Title</th>
             <th>Category</th>
             <th>Price ($)</th>
-            <th>Actions</th>
+            <th className="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((product) => (
+          {currentItems.map(product => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.title}</td>
               <td>{product.category.name}</td>
               <td>{product.price}</td>
-              <td>
+              <td className="text-center">
                 <Button
-                  variant="info"
+                  variant="outline-light"
                   size="sm"
                   className="me-2"
-                  onClick={() => alert(`Details of product ID: ${product.id}`)}
+                  onClick={() => handleEditClick(product)}
                 >
-                  Details
+                  <FaEdit />
                 </Button>
                 <Button
-                  variant="danger"
+                  variant="outline-danger"
                   size="sm"
                   onClick={() => handleDeleteClick(product)}
                 >
-                  Delete
+                  <FaTrash />
                 </Button>
               </td>
             </tr>
@@ -183,26 +127,31 @@ const ProductsTable = () => {
       </Table>
 
       <Pagination className="justify-content-center">
-        {[...Array(totalPages)].map((_, index) => (
+        {[...Array(totalPages)].map((_, idx) => (
           <Pagination.Item
-            key={index}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
+            key={idx}
+            active={idx + 1 === currentPage}
+            onClick={() => handlePageChange(idx + 1)}
+            variant="light"
           >
-            {index + 1}
+            {idx + 1}
           </Pagination.Item>
         ))}
       </Pagination>
 
+      <ProductModal
+        show={showProductModal}
+        onHide={() => setShowProductModal(false)}
+        initialData={editingProduct}
+        onSubmit={handleProductSubmit}
+      />
+
       <DeleteConfirmationModal
-        show={showModal}
-        onClose={() => setShowModal(false)}
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
         onConfirm={handleConfirmDelete}
-        product={productToDelete}
+        product={itemToDelete}
       />
     </div>
   );
-};
-
-export default ProductsTable;
-
+}
