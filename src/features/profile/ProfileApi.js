@@ -28,7 +28,7 @@ export const getUsers = async () => {
 };
 
 
-export const deletecategory = async (id) => {
+export const deleteCategory = async (id) => {
   try {
     const response = await axiosInstance.delete(`/categories/${id}`);
     return response.data;
@@ -38,7 +38,17 @@ export const deletecategory = async (id) => {
   }
 };
 
-export const updatecategory = async (categoryData) => {
+export const addCategory = async (categoryData) => {
+  try {
+    const response = await axiosInstance.post(`/categories` , categoryData);
+    return response.data;
+  } catch (error) {
+    const message = error.response?.data?.message || error.message || 'Failed to fetch product.';
+    throw new Error(message);
+  }
+};
+
+export const updateCategory = async (categoryData) => {
   try {
     const response = await axiosInstance.put(`/categories/${categoryData.id}` , categoryData);
     return response.data;

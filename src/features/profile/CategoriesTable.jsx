@@ -1,71 +1,120 @@
-import { useState, useEffect } from "react";
-import { Button, Table, Pagination } from "react-bootstrap";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
-import { getProductCategories } from "../products/productsAPI";
+import React, { useState, useEffect } from 'react';
+import { Button, Table, Pagination } from 'react-bootstrap';
+import { FaTrash, FaEdit } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import CategoryModal from './CategoryModal';
+import { getProductCategories } from '../products/productsAPI';
+import {addCategory, updateCategory, deleteCategory } from './ProfileApi';
 
-const CategoriesTable = () => {
+export default function CategoriesTable() {
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const data = await getProductCategories();
         setCategories(data);
-      } catch (err) {}
-    };
-    fetchData();
+      } catch (err) {
+        console.error(err);
+        toast.error('Failed to load categories');
+      }
+    })();
   }, []);
 
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = page => setCurrentPage(page);
 
-  const handleDeleteClick = (category) => {
+  const handleAddClick = () => {
+    setEditingCategory(null);
+    setShowCategoryModal(true);
+  };
+
+  const handleEditClick = category => {
+    setEditingCategory(category);
+    setShowCategoryModal(true);
+  };
+
+  const handleCategorySubmit = async formData => {
+    try {
+      if (editingCategory) {
+        const updated = await updateCategory({ ...formData, id: editingCategory.id });
+        setCategories(prev => prev.map(c => (c.id === updated.id ? updated : c)));
+        toast.success('Category updated!');
+      } else {
+        const created = await addCategory(formData);
+        setCategories(prev => [created, ...prev]);
+        toast.success('Category added!');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Operation failed');
+    }
+    setShowCategoryModal(false);
+  };
+
+  const handleDeleteClick = category => {
     setCategoryToDelete(category);
-    setShowModal(true);
+    setShowDeleteModal(true);
   };
 
-  const handleConfirmDelete = (id) => {
-    setCategories((prev) => prev.filter((item) => item.id !== id));
-    setShowModal(false);
+  const handleConfirmDelete = async id => {
+    try {
+      await deleteCategory(id);
+      setCategories(prev => prev.filter(c => c.id !== id));
+      toast.success('Category deleted!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Delete failed');
+    }
+    setShowDeleteModal(false);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = categories.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentItems = categories.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(categories.length / itemsPerPage);
 
   return (
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Categories Table</h4>
-        <Button className="btn btn-add">Add Category</Button>
+        <Button variant="primary" onClick={handleAddClick}>Add Category</Button>
       </div>
-      <Table bordered hover responsive>
-        <thead className="table-light">
+
+      <Table variant="dark" bordered hover responsive>
+        <thead className="table-dark">
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Actions</th>
+            <th className="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((category) => (
+          {currentItems.map(category => (
             <tr key={category.id}>
               <td>{category.id}</td>
               <td>{category.name}</td>
-              <td>
-                <Button variant="info" size="sm" className="me-2">
-                  Details
+              <td className="text-center">
+                <Button
+                  variant="outline-light"
+                  size="sm"
+                  className="me-2"
+                  onClick={() => handleEditClick(category)}
+                >
+                  <FaEdit />
                 </Button>
                 <Button
-                  variant="danger"
+                  variant="outline-danger"
                   size="sm"
                   onClick={() => handleDeleteClick(category)}
                 >
-                  Delete
+                  <FaTrash />
                 </Button>
               </td>
             </tr>
@@ -74,25 +123,31 @@ const CategoriesTable = () => {
       </Table>
 
       <Pagination className="justify-content-center">
-        {[...Array(totalPages)].map((_, index) => (
+        {[...Array(totalPages)].map((_, idx) => (
           <Pagination.Item
-            key={index}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
+            key={idx}
+            active={idx + 1 === currentPage}
+            onClick={() => handlePageChange(idx + 1)}
+            variant="light"
           >
-            {index + 1}
+            {idx + 1}
           </Pagination.Item>
         ))}
       </Pagination>
 
+      <CategoryModal
+        show={showCategoryModal}
+        onHide={() => setShowCategoryModal(false)}
+        initialData={editingCategory}
+        onSubmit={handleCategorySubmit}
+      />
+
       <DeleteConfirmationModal
-        show={showModal}
-        onClose={() => setShowModal(false)}
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
         onConfirm={handleConfirmDelete}
         product={categoryToDelete}
       />
     </div>
   );
-};
-
-export default CategoriesTable;
+}
