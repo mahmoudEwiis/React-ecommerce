@@ -73,4 +73,3 @@ npm install
 # 4. Run the development server
 npm run Start
 
-# App will be available at http://localhost:5173
