@@ -139,9 +139,9 @@ const ImageUploadBox = ({ onUpload, previewUrl }) => {
           width: 100,
           height: 100,
           cursor: 'pointer',
-          backgroundColor: '#343a40', // dark background
-          border: '2px dashed #6c757d', // muted border
-          color: '#adb5bd', // light text
+          backgroundColor: '#343a40',
+          border: '2px dashed #6c757d', 
+          color: '#adb5bd', 
           position: 'relative',
           overflow: 'hidden',
         }}
