@@ -51,23 +51,44 @@ function App() {
                     <Register />
                   </PublicRoute>
                 } />
-                <Route path="/profile" element={<ProfileLayout />}>
-                  <Route path="" element={<Profile />} />
-                  <Route path="favorites" element={<Favorites />} />
+                <Route path="/profile" element={
+                  <ProtectedRoute>
+                    <ProfileLayout />
+                  </ProtectedRoute>
+                }>
+                  <Route path="" element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="favorites" element={
+                    <ProtectedRoute>
+                      <Favorites />
+                    </ProtectedRoute>
+                  } />
                   <Route path="products" element={
-                    <AdminRoute>
-                      <ProductsTable />
-                    </AdminRoute>
+                    <ProtectedRoute>
+                      <AdminRoute>
+                        <ProductsTable />
+                      </AdminRoute>
+                    </ProtectedRoute>
+
                   } />
                   <Route path="users" element={
-                    <AdminRoute>
-                      <UsersTable />
-                    </AdminRoute>
+                    <ProtectedRoute>
+                      <AdminRoute>
+                        <UsersTable />
+                      </AdminRoute>
+                    </ProtectedRoute>
+
                   } />
                   <Route path="categories" element={
-                    <AdminRoute>
-                      <CategoriesTable />
-                    </AdminRoute>
+                    <ProtectedRoute>
+                      <AdminRoute>
+                        <CategoriesTable />
+                      </AdminRoute>
+                    </ProtectedRoute>
+
                   } />
                 </Route>
               </Routes>
