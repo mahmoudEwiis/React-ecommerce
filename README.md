@@ -53,6 +53,8 @@ npm run Start
 - [Framer Motion](https://www.framer.com/motion/)
 - [React Hot Toast](https://react-hot-toast.com/)
 - [Axios](https://axios-http.com/)
+- [FontAwesome](https://fontawesome.com/)
+- [Context API](https://react.dev/learn/passing-data-deeply-with-context/)
 
 Please leave a ⭐ as motivation if you liked the implementation 😄
 
