@@ -35,7 +35,7 @@ git clone https://github.com/mahmoudEwiis/React-ecommerce.git
 cd React-ecommerce
 
 # 2. create a .env file in the root directory
-REACT_APP_API_URL=https://api.escuelajs.co/api/v1
+REACT_APP_API_URL = 
 
 # 3. Install dependencies
 npm install
