@@ -7,13 +7,6 @@
     padding-right: 3rem; 
   }
 
-  .form-control  , .form-control:focus{
-    background-color: transparent;
-    color: #6c757d;
-  }
-  .form-control::placeholder {
-    color: #6c757d !important;
-  }
   .form-floating-custom .form-control:focus ~ label,
   .form-floating-custom .form-control:not(:placeholder-shown) ~ label {
     top: -0.2em;
@@ -45,7 +38,7 @@
   
   .password-toggle-icon {
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 1rem;
     transform: translateY(-50%);
     cursor: pointer;
@@ -55,10 +48,11 @@
   
   input.is-invalid + .password-toggle-icon {
     right: .5rem !important; 
-    top: 32%;
+    top: 25%;
   }
 
   input.is-valid + .password-toggle-icon {
+    top: 43%;
     right: .5rem !important; 
   }
 

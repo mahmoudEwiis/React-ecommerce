@@ -6,6 +6,7 @@ import './auth.css';
 import { register } from './authAPI';
 import toast from 'react-hot-toast';
 import ImageUploadBox from '../../components/ImageUploadBox';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -22,6 +23,9 @@ export default function Register() {
     password: false,
     confirm: false,
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,11 +66,9 @@ export default function Register() {
         <Col xs={12} sm={8} md={6} lg={4}>
           <h2 className="mb-4 text-center">Create a New Account</h2>
           <Form noValidate onSubmit={handleSubmit} className="w-100">
-
             <ImageUploadBox onUpload={(url) => setForm(prev => ({ ...prev, avatar: url }))} />
 
-            {/* Name */}
-            <FloatingLabel controlId="floatingName" label="Full Name" className="mb-3 form-floating-custom">
+            <Form.Group controlId="name" className="mb-3 position-relative">
               <Form.Control
                 type="text"
                 name="name"
@@ -78,11 +80,12 @@ export default function Register() {
                 isValid={touched.name && nameValid}
                 required
               />
-              <Form.Control.Feedback type="invalid">Please enter your name.</Form.Control.Feedback>
-            </FloatingLabel>
+              <Form.Control.Feedback type="invalid">
+                Please enter your name.
+              </Form.Control.Feedback>
+            </Form.Group>
 
-            {/* Email */}
-            <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 form-floating-custom">
+            <Form.Group controlId="email" className="mb-3 position-relative">
               <Form.Control
                 type="email"
                 name="email"
@@ -94,13 +97,14 @@ export default function Register() {
                 isValid={touched.email && emailValid}
                 required
               />
-              <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
-            </FloatingLabel>
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid email address.
+              </Form.Control.Feedback>
+            </Form.Group>
 
-            {/* Password */}
-            <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3 form-floating-custom">
+            <Form.Group controlId="password" className="mb-3 position-relative">
               <Form.Control
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
                 value={form.password}
@@ -111,15 +115,20 @@ export default function Register() {
                 required
                 minLength={6}
               />
+              <div
+                className="password-toggle-icon"
+                onClick={() => setShowPassword(prev => !prev)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
               <Form.Control.Feedback type="invalid">
                 Password must be at least 6 characters.
               </Form.Control.Feedback>
-            </FloatingLabel>
+            </Form.Group>
 
-            {/* Confirm Password */}
-            <FloatingLabel controlId="floatingConfirm" label="Confirm Password" className="mb-4 form-floating-custom">
+            <Form.Group controlId="confirm" className="mb-4 position-relative">
               <Form.Control
-                type="password"
+                type={showConfirm ? 'text' : 'password'}
                 name="confirm"
                 placeholder="Confirm Password"
                 value={form.confirm}
@@ -129,8 +138,16 @@ export default function Register() {
                 isValid={touched.confirm && confirmValid}
                 required
               />
-              <Form.Control.Feedback type="invalid">Passwords do not match.</Form.Control.Feedback>
-            </FloatingLabel>
+              <div
+                className="password-toggle-icon"
+                onClick={() => setShowConfirm(prev => !prev)}
+              >
+                {showConfirm ? <FaEyeSlash /> : <FaEye />}
+              </div>
+              <Form.Control.Feedback type="invalid">
+                Passwords do not match.
+              </Form.Control.Feedback>
+            </Form.Group>
 
             <Button variant="success" type="submit" className="w-100 mb-3">
               Register
