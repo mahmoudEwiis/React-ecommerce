@@ -141,9 +141,7 @@ const ProductsTable = () => {
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Products Table</h4>
-        <Button variant="primary">
-          Add Product
-        </Button>
+        <Button className="btn btn-add">Add Product</Button>
       </div>
       <Table bordered hover responsive>
         <thead className="table-light">

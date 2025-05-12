@@ -41,7 +41,7 @@ const CategoriesTable = () => {
     <div className="container mt-4 mx-auto">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="mb-0">Categories Table</h4>
-        <Button variant="primary">Add Category</Button>
+        <Button className="btn btn-add">Add Category</Button>
       </div>
       <Table bordered hover responsive>
         <thead className="table-light">

@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
         };
 
         if (localStorage.getItem('token')) {
-            console.log('hi')
             fetchProfile();
         }
     }, []);
@@ -30,20 +29,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useProfile = () => useContext(AuthContext);
-
-
-// import { createContext, useContext, useState } from 'react';
-
-// const AuthContext = createContext();
-
-// export const AuthProvider = ({ children }) => {
-//   const [profile, setProfile] = useState(null);
-
-//   return (
-//     <AuthContext.Provider value={{ profile, setProfile }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useProfile = () => useContext(AuthContext);

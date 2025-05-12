@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useProfile } from "../context/AuthContext";
+import '../features/profile/profile.css';
 
 export default function ProfileLayout() {
     const { profile } = useProfile();

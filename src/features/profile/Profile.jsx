@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useProfile } from '../../context/AuthContext';
-import { updateProfile } from './ProfileApi'; 
+import { updateUser } from './ProfileApi'; 
 
 const Profile = () => {
   const { profile, setProfile } = useProfile();
@@ -22,7 +22,7 @@ const Profile = () => {
 
   const handleSaveChanges = async () => {
     try {
-      const updatedProfile = await updateProfile(formData);  
+      const updatedProfile = await updateUser(formData);  
       setProfile(updatedProfile); 
       alert('Profile updated successfully!');
     } catch (error) {
