@@ -41,9 +41,10 @@ const ImageUploadBox = ({ onUpload }) => {
   return (
     <Form.Group className="mb-3">
       <div
-        className="border border-2 border-dashed rounded d-flex justify-content-center align-items-center"
+        className="border border-2 border-dashed rounded d-flex flex-column justify-content-center align-items-center"
         style={{
-          height: 200,
+          width: 100,
+          height: 100,
           cursor: 'pointer',
           backgroundColor: '#f8f9fa',
           position: 'relative',
@@ -55,13 +56,19 @@ const ImageUploadBox = ({ onUpload }) => {
           <img
             src={preview}
             alt="Preview"
-            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
           />
         ) : (
-          <div className="text-center text-muted">
-            <FaCloudUploadAlt size={50} className="mb-2" />
-            <div>{uploading ? 'Uploading...' : 'Click to upload image'}</div>
-          </div>
+          <>
+            <FaCloudUploadAlt size={32} className="text-muted mb-1" />
+            <span className="text-muted" style={{ fontSize: '0.75rem' }}>
+              UPLOAD IMAGE
+            </span>
+          </>
         )}
         <Form.Control
           type="file"

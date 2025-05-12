@@ -63,7 +63,7 @@ export default function Register() {
   return (
     <Container fluid className="vh-100 d-flex justify-content-center align-items-center">
       <Row className="w-100 justify-content-center">
-        <Col xs={12} sm={8} md={6} lg={4}>
+        <Col xs={12} sm={8} md={6} lg={4} className="form-outLay">
           <h2 className="mb-4 text-center">Create a New Account</h2>
           <Form noValidate onSubmit={handleSubmit} className="w-100">
             <ImageUploadBox onUpload={(url) => setForm(prev => ({ ...prev, avatar: url }))} />
