@@ -48,7 +48,7 @@ a {
     background-color: #5243d976;
 }
 
-.nav-link.active {
+.nav-pills .nav-link.active {
     color: #fff !important;
     background-color: #5243d976;
 }
