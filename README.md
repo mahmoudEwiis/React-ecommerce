@@ -99,6 +99,7 @@ A responsive and dynamic e-commerce web application built with React and Bootstr
 - ⚡ Toast Notifications with `react-hot-toast`
 - 🔄 Smooth animations using `framer-motion`
 
+Please leave a ⭐ as motivation if you liked the implementation 😄
 ---
 
 ## 🧪 Usage
