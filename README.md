@@ -99,7 +99,6 @@ A responsive and dynamic e-commerce web application built with React and Bootstr
 - ⚡ Toast Notifications with `react-hot-toast`
 - 🔄 Smooth animations using `framer-motion`
 
-Please leave a ⭐ as motivation if you liked the implementation 😄
 ---
 
 ## 🧪 Usage
@@ -128,6 +127,8 @@ npm run Start
 - [Framer Motion](https://www.framer.com/motion/)
 - [React Hot Toast](https://react-hot-toast.com/)
 - [Axios](https://axios-http.com/)
+
+Please leave a ⭐ as motivation if you liked the implementation 😄
 
 ---
 
