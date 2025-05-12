@@ -1,7 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 
-const DeleteConfirmationModal = ({ show, onClose, onConfirm, product }) => {
-  if (!product) return null;
+const DeleteConfirmationModal = ({ show, onClose, onConfirm, item }) => {
+  if (!item) return null;
 
   return (
     <Modal show={show} onHide={onClose} centered>
@@ -9,13 +9,13 @@ const DeleteConfirmationModal = ({ show, onClose, onConfirm, product }) => {
         <Modal.Title>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Are you sure you want to delete <strong>{product.title}</strong>?
+        Are you sure you want to delete <strong>{item.title || item.name}</strong>?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={() => onConfirm(product.id)}>
+        <Button variant="danger" onClick={() => onConfirm(item.id)}>
           Delete
         </Button>
       </Modal.Footer>

@@ -150,7 +150,7 @@ export default function ProductsTable() {
         show={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleConfirmDelete}
-        product={itemToDelete}
+        item={itemToDelete}
       />
     </div>
   );

@@ -121,7 +121,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 onConfirm={handleConfirmDelete}
-                product={productToDelete}
+                item={productToDelete}
             />
 
         </>

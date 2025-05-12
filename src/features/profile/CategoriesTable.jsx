@@ -146,7 +146,7 @@ export default function CategoriesTable() {
         show={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleConfirmDelete}
-        product={categoryToDelete}
+        item={categoryToDelete}
       />
     </div>
   );
