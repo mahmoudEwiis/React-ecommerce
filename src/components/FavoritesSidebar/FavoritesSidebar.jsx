@@ -4,8 +4,10 @@ import { useState } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal";
 import '../../styles/sidebar.css'
 import './FavoritesSidebar.css'
+import { useNavigate } from "react-router-dom";
 
 const FavoritesSidebar = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const { favorites, removeFromFavorites } = useFavorites();
   const { addToCart, isInCart } = useCart();
 
@@ -65,6 +67,9 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                     className="item-title"
                     onClick={(e) => {
                       e.preventDefault();
+                      onClose();
+                      navigate(`/products/${item.id}`);
+
                     }}
                   >
                     {item.title}

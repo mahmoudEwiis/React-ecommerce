@@ -64,6 +64,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                                         href="#"
                                         onClick={(e) => {
                                             e.preventDefault();
+                                            onClose(); 
                                             navigate(`/products/${cartItem.id}`);
                                         }}
                                         className="item-title"
