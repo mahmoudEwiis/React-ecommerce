@@ -47,6 +47,7 @@ export default function ProfileLayout() {
                 {[
                   { to: '', icon: 'fa-user', label: 'My Profile' },
                   { to: 'favorites', icon: 'fa-heart', label: 'Favorites' },
+                  { to: 'Carts', icon: 'fa-cart-plus', label: 'Carts' },
                   { to: 'products', icon: 'fa-box-open', label: 'Products', adminOnly: true },
                   { to: 'categories', icon: 'fa-list', label: 'Categories', adminOnly: true },
                   { to: 'users', icon: 'fa-users', label: 'Users', adminOnly: true },

@@ -24,6 +24,7 @@ import ProductsTable from './features/profile/ProductsTable';
 import CategoriesTable from './features/profile/CategoriesTable';
 import UsersTable from './features/profile/UsersTable';
 import AdminRoute from './components/AdminRoute';
+import Carts from './features/profile/Carts';
 
 function App() {
   return (
@@ -64,6 +65,11 @@ function App() {
                   <Route path="favorites" element={
                     <ProtectedRoute>
                       <Favorites />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="Carts" element={
+                    <ProtectedRoute>
+                      <Carts />
                     </ProtectedRoute>
                   } />
                   <Route path="products" element={
