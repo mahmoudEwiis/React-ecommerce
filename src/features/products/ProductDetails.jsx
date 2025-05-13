@@ -71,7 +71,34 @@ export default function ProductDetails() {
         infinite: true,
         arrows: false,
         autoplay: false,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
     };
+
 
     return (
         <Container className="py-5">
@@ -147,7 +174,7 @@ export default function ProductDetails() {
                     <div className="d-flex align-items-center gap-2 mt-4">
                         {inCart ? (
                             <>
-                                <Button variant="outline-secondary" disabled={quantity === 1}  onClick={() => updateCartItemQuantity(product, '-')}  >-</Button>
+                                <Button variant="outline-secondary" disabled={quantity === 1} onClick={() => updateCartItemQuantity(product, '-')}  >-</Button>
                                 <span>{quantity}</span>
                                 <Button variant="outline-secondary" onClick={() => updateCartItemQuantity(product, '+')}>+</Button>
                                 <Button className='btnAddToCart active' disabled>Added to Cart</Button>
