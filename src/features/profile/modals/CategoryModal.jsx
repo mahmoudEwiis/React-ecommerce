@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import ImageUploadBox from '../../components/ImageUploadBox';
+import ImageUploadBox from '../../../components/ImageUploadBox';
 
 export default function CategoryModal({ show, onHide, onSubmit, initialData }) {
   const [form, setForm] = useState({ name: '', image: '' });

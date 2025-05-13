@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import ImageUploadBox from '../../components/ImageUploadBox';
-import { getProductCategories } from '../products/productsAPI';
+import ImageUploadBox from '../../../components/ImageUploadBox';
+import { getProductCategories } from '../../products/productsAPI';
 import { FaTimes } from 'react-icons/fa';
 
 export default function ProductModal({ show, onHide, onSubmit, initialData }) {

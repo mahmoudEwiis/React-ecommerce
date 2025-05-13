@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import ImageUploadBox from '../../components/ImageUploadBox';
+import ImageUploadBox from '../../../components/ImageUploadBox';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function UserModal({ show, onHide, onSubmit, initialData }) {
