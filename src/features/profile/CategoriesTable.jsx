@@ -3,7 +3,7 @@ import { Button, Table, Pagination } from 'react-bootstrap';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
-import CategoryModal from './CategoryModal';
+import CategoryModal from './modals/CategoryModal';
 import { getProductCategories } from '../products/productsAPI';
 import {addCategory, updateCategory, deleteCategory } from './ProfileApi';
 

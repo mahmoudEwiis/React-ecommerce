@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Table, Pagination } from "react-bootstrap";
 import {  FaEdit } from 'react-icons/fa';
 import { getUsers, addUser, updateUser } from "./ProfileApi";
-import UserModal from "./UserModal";
+import UserModal from "./modals/UserModal";
+import toast from "react-hot-toast";
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
@@ -18,6 +19,7 @@ const UsersTable = () => {
         setUsers(data);
       } catch (err) {
         console.error(err);
+        toast.error('Failed to load users')
       }
     };
     fetchData();
@@ -41,12 +43,15 @@ const UsersTable = () => {
       if (editingUser) {
         const updated = await updateUser({ ...formData, id: editingUser.id });
         setUsers((prev) => prev.map((u) => (u.id === updated.id ? updated : u)));
+        toast.success('User updated!');
       } else {
         const created = await addUser(formData);
         setUsers(prev => [created, ...prev]);
+        toast.success('User added!')
       }
     } catch (err) {
       console.error(err);
+      toast.error('Operation failed');
     }
     setShowUserModal(false);
   };
