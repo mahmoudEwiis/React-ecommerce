@@ -26,6 +26,7 @@ import UsersTable from './features/profile/UsersTable';
 import AdminRoute from './components/AdminRoute';
 import Carts from './features/profile/Carts';
 import Checkout from './features/checkout/Checkout';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -34,77 +35,79 @@ function App() {
         <CartProvider>
           <FavoritesProvider>
             <MainLayout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products/:id" element={<ProductPage />} />
-                <Route path="/cart" element={
-                  <ProtectedRoute>
-                    <Cart />
-                  </ProtectedRoute>
-
-                } />
-                <Route path="/checkout" element={
-                  <ProtectedRoute>
-                    <Checkout />
-                  </ProtectedRoute>
-
-                } />
-                <Route path="/login" element={
-                  <PublicRoute>
-                    <Login />
-                  </PublicRoute>
-                } />
-                <Route path="/register" element={
-                  <PublicRoute>
-                    <Register />
-                  </PublicRoute>
-                } />
-                <Route path="/profile" element={
-                  <ProtectedRoute>
-                    <ProfileLayout />
-                  </ProtectedRoute>
-                }>
-                  <Route path="" element={
+              <ScrollToTop>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/products/:id" element={<ProductPage />} />
+                  <Route path="/cart" element={
                     <ProtectedRoute>
-                      <Profile />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="favorites" element={
-                    <ProtectedRoute>
-                      <Favorites />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="Carts" element={
-                    <ProtectedRoute>
-                      <Carts />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="products" element={
-                    <ProtectedRoute>
-                      <AdminRoute>
-                        <ProductsTable />
-                      </AdminRoute>
+                      <Cart />
                     </ProtectedRoute>
 
                   } />
-                  <Route path="users" element={
+                  <Route path="/checkout" element={
                     <ProtectedRoute>
-                      <AdminRoute>
-                        <UsersTable />
-                      </AdminRoute>
+                      <Checkout />
                     </ProtectedRoute>
 
                   } />
-                  <Route path="categories" element={
-                    <ProtectedRoute>
-                      <AdminRoute>
-                        <CategoriesTable />
-                      </AdminRoute>
-                    </ProtectedRoute>
-
+                  <Route path="/login" element={
+                    <PublicRoute>
+                      <Login />
+                    </PublicRoute>
                   } />
-                </Route>
-              </Routes>
+                  <Route path="/register" element={
+                    <PublicRoute>
+                      <Register />
+                    </PublicRoute>
+                  } />
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <ProfileLayout />
+                    </ProtectedRoute>
+                  }>
+                    <Route path="" element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    } />
+                    <Route path="favorites" element={
+                      <ProtectedRoute>
+                        <Favorites />
+                      </ProtectedRoute>
+                    } />
+                    <Route path="Carts" element={
+                      <ProtectedRoute>
+                        <Carts />
+                      </ProtectedRoute>
+                    } />
+                    <Route path="products" element={
+                      <ProtectedRoute>
+                        <AdminRoute>
+                          <ProductsTable />
+                        </AdminRoute>
+                      </ProtectedRoute>
+
+                    } />
+                    <Route path="users" element={
+                      <ProtectedRoute>
+                        <AdminRoute>
+                          <UsersTable />
+                        </AdminRoute>
+                      </ProtectedRoute>
+
+                    } />
+                    <Route path="categories" element={
+                      <ProtectedRoute>
+                        <AdminRoute>
+                          <CategoriesTable />
+                        </AdminRoute>
+                      </ProtectedRoute>
+
+                    } />
+                  </Route>
+                </Routes>
+              </ScrollToTop>
             </MainLayout>
           </FavoritesProvider>
         </CartProvider>
