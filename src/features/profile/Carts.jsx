@@ -33,7 +33,7 @@ export default function Carts() {
                 <p className="empty-wishlist__subtitle">
                     You have no items in your cart. Browse products and click “Add to Cart” to fill it up.
                 </p>
-                <Link to="/" className="btn btn-warning">Continue Shopping</Link>
+                <Link to="/" className="btn text-white" style={{ backgroundColor: '#6666AF', transition: 'background-color 0.3s' }}>Continue Shopping</Link>
             </div>
         );
     }
@@ -95,7 +95,8 @@ export default function Carts() {
 
                                     <div>
                                         <button
-                                            className="btn btn-sm btn-success me-2 mb-2"
+                                            className="btn text-white me-2 mb-2"
+                                            style={{ backgroundColor: '#6666AF', transition: 'background-color 0.3s' }}
                                             onClick={() => navigate("/checkout")}
                                         >
                                             Buy this

@@ -25,6 +25,7 @@ import CategoriesTable from './features/profile/CategoriesTable';
 import UsersTable from './features/profile/UsersTable';
 import AdminRoute from './components/AdminRoute';
 import Carts from './features/profile/Carts';
+import Checkout from './features/checkout/Checkout';
 
 function App() {
   return (
@@ -39,6 +40,12 @@ function App() {
                 <Route path="/cart" element={
                   <ProtectedRoute>
                     <Cart />
+                  </ProtectedRoute>
+
+                } />
+                <Route path="/checkout" element={
+                  <ProtectedRoute>
+                    <Checkout />
                   </ProtectedRoute>
 
                 } />

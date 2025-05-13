@@ -29,7 +29,7 @@ export default function Favorites() {
         <p className="empty-wishlist__subtitle">
           You have no items in your wishlist. To add items to your wishlist click on the heart icon on the product page.
         </p>
-        <Link to="/" className="btn btn-warning">Continue Shopping</Link>
+        <Link to="/" className="btn text-white" style={{ backgroundColor: '#6666AF', transition: 'background-color 0.3s' }}>Continue Shopping</Link>
       </div>
     );
   }
@@ -73,11 +73,13 @@ export default function Favorites() {
                   </div>
                   <p className="text-success small mb-2">Free shipping</p>
                   <div>
-                    <Link to={`/products/${item.id}`} className="btn btn-sm btn-warning me-2 mb-2">
+                    <Link to={`/products/${item.id}`} className="btn text-white me-2 mb-2"
+                    style={{ backgroundColor: '#6666AF', transition: 'background-color 0.3s' }}>
                       Buy this
                     </Link>
                     <button
                       className="btn btn-sm btn-outline-danger mb-2"
+                      
                       onClick={() => handleDeleteClick(item)}
                     >
                       <i className="fa fa-heart"></i>
