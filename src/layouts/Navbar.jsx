@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar = ({ onToggleCart, onToggleFavorites }) => {
   const navigate = useNavigate();
   const { profile } = useProfile();
+  const isAdmin = profile?.role === 'admin';
   const { cartItems } = useCart();
   const { favorites } = useFavorites();
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -84,6 +85,26 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                     <li><hr className="dropdown-divider" /></li>
                     <li><Link to="/profile" className="dropdown-item" onClick={handleMenuClose}>My Profile</Link></li>
                     <li><Link to="/profile/favorites" className="dropdown-item" onClick={handleMenuClose}>My Wishlist</Link></li>
+                    <li>
+                      <Link to="/cart" className="dropdown-item" onClick={handleMenuClose}>
+                       My Cart
+                      </Link>
+                    </li>
+                    <li hidden={!isAdmin}>
+                      <Link to="/products" className="dropdown-item" onClick={handleMenuClose}>
+                        Products
+                      </Link>
+                    </li>
+                    <li hidden={!isAdmin}>
+                      <Link to="/categories" className="dropdown-item" onClick={handleMenuClose}>
+                        Categories
+                      </Link>
+                    </li>
+                    <li hidden={!isAdmin}>
+                      <Link to="/users" className="dropdown-item" onClick={handleMenuClose}>
+                        Users
+                      </Link>
+                    </li>
                     <li>
                       <button className="dropdown-item text-danger" onClick={() => { handleLogout(); handleMenuClose(); }}>
                         Sign Out
