@@ -108,7 +108,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                             Total: <span>${totalPrice}</span>
                         </h5>
                         <div className="checkout-btn d-flex">
-                            <button className="btn" onClick={() => navigate('/checkout')}>
+                            <button className="btn" onClick={() =>{ onClose(); navigate('/checkout')}}>
                                 Checkout
                             </button>
                         </div>
