@@ -35,7 +35,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
       <div className="container d-flex justify-content-between align-items-center">
 
         <div className="">
-          <Link className="navbar-brand fw-bold" to="/">MyShop</Link>
+          <Link className="navbar-brand fw-bold" to="/"  style={{ color: '#6666AF' }}>MyShop</Link>
         </div>
 
         <div className="d-flex align-items-center gap-3 ">

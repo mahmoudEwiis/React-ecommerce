@@ -49,6 +49,11 @@ export default function Login() {
 
     return (
         <Container fluid className="vh-100 d-flex justify-content-center align-items-center">
+            <div className="container d-flex p-3 position-absolute top-0">
+                <Link to="/" className="fw-bold fs-3 text-decoration-none" style={{ color: '#6666AF' }}>
+                    MyShop
+                </Link>
+            </div>
             <Row className="w-100 justify-content-center">
                 <Col xs={12} sm={8} md={6} lg={4} className="form-outLay">
                     <h2 className="mb-4 text-center">Login</h2>
@@ -93,7 +98,7 @@ export default function Login() {
                             Login
                         </Button>
 
-                        <div className="text-center">
+                        <div className="text-center d-flex justify-content-center align-items-center gap-2">
                             Don't have an account?{' '}
                             <Link to="/register" className="btn btn-link p-0">
                                 Register
