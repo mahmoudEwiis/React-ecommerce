@@ -34,7 +34,7 @@ export default function Home() {
         <HeroSlider />
         <div className="container">
           <ProductFilters
-            filtersn={filters}
+            filtersProduct={filters}
             categories={categories}
             onFilterChange={setFilters}
           />

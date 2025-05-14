@@ -31,7 +31,29 @@ export default function ProductList({ filters }) {
                     offset: offset,
                     ...filters,
                 });
-                setProducts(data);
+
+                let sortedData = [...data];
+
+                if (filters.sort) {
+                    switch (filters.sort) {
+                        case 'name_asc':
+                            sortedData.sort((a, b) => a.title.localeCompare(b.title));
+                            break;
+                        case 'name_desc':
+                            sortedData.sort((a, b) => b.title.localeCompare(a.title));
+                            break;
+                        case 'price_asc':
+                            sortedData.sort((a, b) => a.price - b.price);
+                            break;
+                        case 'price_desc':
+                            sortedData.sort((a, b) => b.price - a.price);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                setProducts(sortedData);
             } catch (err) {
                 setError(err.message || "Something went wrong");
             } finally {

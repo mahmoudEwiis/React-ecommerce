@@ -4,9 +4,9 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 
-export default function ProductFilters({ filtersn ,  categories = [], onFilterChange }) {
+export default function ProductFilters({ filtersProduct ,  categories = [], onFilterChange }) {
 
-  const [filters, setFilters] = useState(filtersn);
+  const [filters, setFilters] = useState(filtersProduct);
 
   useEffect(() => {
     onFilterChange(filters);
