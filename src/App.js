@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
 import Register from './features/auth/Register';
 import Login from './features/auth/Login';
-import Cart from './features/cart/Cart';
 import MainLayout from './layouts/MainLayout';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,12 +38,6 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/products/:id" element={<ProductPage />} />
-                  <Route path="/cart" element={
-                    <ProtectedRoute>
-                      <Cart />
-                    </ProtectedRoute>
-
-                  } />
                   <Route path="/checkout" element={
                     <ProtectedRoute>
                       <Checkout />

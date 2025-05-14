@@ -48,7 +48,6 @@ export default function Checkout() {
       form.postalCode &&
       form.zip
     ) {
-      // place order...
       navigate("/order-confirmation");
     }
   };
