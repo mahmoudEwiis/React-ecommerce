@@ -86,7 +86,7 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                     <li><Link to="/profile" className="dropdown-item" onClick={handleMenuClose}>My Profile</Link></li>
                     <li><Link to="/profile/favorites" className="dropdown-item" onClick={handleMenuClose}>My Wishlist</Link></li>
                     <li>
-                      <Link to="/profile/cart" className="dropdown-item" onClick={handleMenuClose}>
+                      <Link to="/profile/Carts" className="dropdown-item" onClick={handleMenuClose}>
                        My Cart
                       </Link>
                     </li>
