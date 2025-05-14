@@ -11,7 +11,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
-    
+
     const { cartItems, setCartItems, removeFromCart, updateCartItemQuantity } = useCart();
 
     const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -50,8 +50,25 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
                 <div className="sidebar-body">
                     {!cartCount ? (
-                        <div className="empty-sidebar">
-                            <p className="empty-description">No products in Cartlist</p>
+                        <div className="empty-sidebar d-flex align-items-center justify-content-center h-100">
+                            <div>
+                                <svg
+                                    width="120"
+                                    height="120"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#6c757d"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="mb-4"
+                                >
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z" />
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                                </svg>
+                                <p className="empty-description text-black ">No products in Cartlist</p>
+                            </div>
                         </div>
                     ) : (
                         cartItems.map((cartItem) => (
@@ -64,7 +81,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                                         href="#"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            onClose(); 
+                                            onClose();
                                             navigate(`/products/${cartItem.id}`);
                                         }}
                                         className="item-title"
@@ -95,7 +112,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                                 </div>
                                 <div className="item-close-btn"
                                     onClick={() => handleDeleteClick(cartItem)}>
-                                    <i class="fa-solid fa-xmark"></i>
+                                    <i class="fa-solid fa-xmark text-black" style={{ cursor: 'pointer' }}></i>
                                 </div>
                             </div>
                         ))
@@ -108,7 +125,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                             Total: <span>${totalPrice}</span>
                         </h5>
                         <div className="checkout-btn d-flex">
-                            <button className="btn" onClick={() =>{ onClose(); navigate('/checkout')}}>
+                            <button className="btn" onClick={() => { onClose(); navigate('/checkout') }}>
                                 Checkout
                             </button>
                         </div>

@@ -42,11 +42,27 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
 
         <div className="sidebar-body">
           {favorites.length === 0 ? (
-            <div className="empty-sidebar">
-              <div className="empty-image">
-                {/* Put your SVG here */}
+            <div className="empty-sidebar d-flex align-items-center justify-content-center h-100">
+
+
+              <div>
+                <svg
+                  width="120"
+                  height="120"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6c757d"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mb-4"
+                >
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z" />
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                  <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+                <p className="empty-description text-black ">No products in wishlist</p>
               </div>
-              <p className="empty-description">No products in wishlist</p>
             </div>
           ) : (
             favorites.map((item) => (
@@ -94,7 +110,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                 </div>
                 <div className="item-close-btn "
                   onClick={() => handleDeleteClick(item)}>
-                  <i class="fa-solid fa-xmark"></i>
+                  <i class="fa-solid fa-xmark text-black"></i>
                 </div>
               </div>
             ))
