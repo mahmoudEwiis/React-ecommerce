@@ -65,11 +65,7 @@ export default function ProductList({ filters }) {
     }, [currentPage, filters]);
 
     if (loading) {
-        return (
-            <Container className="text-center py-5">
-                <Spinner animation="border" />
-            </Container>
-        );
+        return <Container fluid className="vh-100 d-flex justify-content-center align-items-center">  <Spinner animation="border" /> </Container>;
     }
 
     if (error) {
