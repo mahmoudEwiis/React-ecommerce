@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function Checkout() {
       form.postalCode &&
       form.zip
     ) {
-      navigate("/order-confirmation");
+      toast.error('this Feature Not Added Yet');
     }
   };
 

@@ -26,6 +26,7 @@ import AdminRoute from './components/AdminRoute';
 import Carts from './features/profile/Carts';
 import Checkout from './features/checkout/Checkout';
 import ScrollToTop from './components/ScrollToTop';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -99,6 +100,7 @@ function App() {
 
                     } />
                   </Route>
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </ScrollToTop>
             </MainLayout>
