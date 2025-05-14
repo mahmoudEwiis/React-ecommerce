@@ -86,22 +86,22 @@ const Navbar = ({ onToggleCart, onToggleFavorites }) => {
                     <li><Link to="/profile" className="dropdown-item" onClick={handleMenuClose}>My Profile</Link></li>
                     <li><Link to="/profile/favorites" className="dropdown-item" onClick={handleMenuClose}>My Wishlist</Link></li>
                     <li>
-                      <Link to="/cart" className="dropdown-item" onClick={handleMenuClose}>
+                      <Link to="/profile/cart" className="dropdown-item" onClick={handleMenuClose}>
                        My Cart
                       </Link>
                     </li>
                     <li hidden={!isAdmin}>
-                      <Link to="/products" className="dropdown-item" onClick={handleMenuClose}>
+                      <Link to="/profile/products" className="dropdown-item" onClick={handleMenuClose}>
                         Products
                       </Link>
                     </li>
                     <li hidden={!isAdmin}>
-                      <Link to="/categories" className="dropdown-item" onClick={handleMenuClose}>
+                      <Link to="/profile/categories" className="dropdown-item" onClick={handleMenuClose}>
                         Categories
                       </Link>
                     </li>
                     <li hidden={!isAdmin}>
-                      <Link to="/users" className="dropdown-item" onClick={handleMenuClose}>
+                      <Link to="/profile/users" className="dropdown-item" onClick={handleMenuClose}>
                         Users
                       </Link>
                     </li>
