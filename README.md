@@ -16,6 +16,8 @@ This project is a modern e-commerce frontend built using React. It allows users 
 - 🛍️ Product Listing & Details
 - 📦 Add to Cart with Quantity Control
 - ❤️ Favorite/Wishlist Functionality
+- ⚡ Product filtering by category & Price Range & Title.
+- ⚡ Product sorting by price and name.
 - 👤 User Profile with Avatar Upload
 - 🛠️ Admin Dashboard (Products, Categories, Users Management)
 - 🔄 Protected Routes for Authenticated Users and Admins
