@@ -57,7 +57,7 @@ export default function ProductDetails() {
         fetchProduct();
     }, [id]);
 
-    if (loading) return <Container className="text-center py-5"><Spinner animation="border" /></Container>;
+    if (loading) return <Container fluid className="vh-100 d-flex justify-content-center align-items-center">  <Spinner animation="border" /> </Container>;
     if (error) return <Container className="py-5"><Alert variant="danger">Error: {error}</Alert></Container>;
     if (!product) return null;
 
@@ -102,7 +102,13 @@ export default function ProductDetails() {
 
     return (
         <Container className="py-5">
-            <Link to="/" className="btn btn-link mb-4">← Back to Products</Link>
+
+            <div className="container d-flex justify-content-start align-items-center gap-2 my-4 rounded pt-3"
+                style={{ backgroundColor: '#6666AF', transition: 'background-color 0.3s' }}>
+                <Link to="/" className="mb-3" style={{ color: '#fff', transition: 'background-color 0.3s' }}>Products</Link>
+                <p> &gt; {product.title} </p>
+            </div>
+
             <Row className='align-items-center'>
                 <Col md={6} className="d-flex">
                     <div style={{ width: "100px", marginRight: "15px" }}>
