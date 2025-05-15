@@ -18,7 +18,7 @@ export const CartProvider = ({ children }) => {
         setCartItems(prev => {
             const exists = prev.find(i => i.id === item.id);
             if (exists) {
-                toast.success('Removed from cart Items');
+                toast.success('Increase cart Item Quantity');
                 return prev.map(i => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
             } else {
                 toast.success('Added to cart Items');

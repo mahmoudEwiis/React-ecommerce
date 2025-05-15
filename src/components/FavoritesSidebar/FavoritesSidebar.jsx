@@ -77,7 +77,7 @@ const FavoritesSidebar = ({ isOpen, onClose }) => {
                     }}
                   />
                 </div>
-                <div className="item-description">
+                <div className="item-description flex-grow-1">
                   <a
                     href="#"
                     className="item-title"

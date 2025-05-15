@@ -76,7 +76,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                                 <div className="item-img">
                                     <img src={cartItem.images[0]} alt="product_image" />
                                 </div>
-                                <div className="item-description">
+                                <div className="item-description flex-grow-1">
                                     <a
                                         href="#"
                                         onClick={(e) => {
